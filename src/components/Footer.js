@@ -51,7 +51,7 @@ export default function Footer() {
             "The prices offered here are in complete gratification with the customer as it is cost effective and best suitable with your purchase to make your shopping experience hassle free and easy right from the comfort of your couch."
           }
         />
-        <div className=" mx-3">
+        <div className=" mx-3 hidden sm:block">
           <Typography variant="h6" className=" " align="center">
             Connect With Us
           </Typography>
