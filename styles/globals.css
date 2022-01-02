@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   padding: 0;
@@ -13,4 +17,12 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.cornerImage {
+  width: 20rem;
+  height: 30rem;
+}
+.mainImage {
+  height: calc(100% - 32px);
 }
