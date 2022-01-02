@@ -5,7 +5,7 @@ import { deepPurple, amber } from "@mui/material/colors";
 
 // Create a theme instance.
 
-const colors = {
+export const colors = {
   primary: "rgba(174,150,129,0.94)",
   secondary: "#DFD8CA",
   text: "#4a4a4a",

@@ -6,6 +6,7 @@ import ReactThemeProvider from "../src/components/ThemeProvider";
 import Banner from "../src/components/Banner";
 import ReadyToShip from "../src/components/ReadyToShip";
 import Trending from "../src/components/Trending";
+import Footer from "../src/components/Footer";
 
 export default function Home() {
   return (
@@ -22,9 +23,15 @@ export default function Home() {
           <Banner />
           <ReadyToShip />
           <Trending />
+          <ReadyToShip />
+          <Trending />
+          <ReadyToShip />
+          <Trending />
+          <ReadyToShip />
+          <Trending />
         </main>
 
-        <footer className={styles.footer}></footer>
+        <Footer />
       </div>
     </ReactThemeProvider>
   );
