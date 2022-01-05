@@ -1,34 +1,15 @@
 import React from "react";
 import FiveGridStyle from "./FiveGridStyle";
+import useSWR from "swr";
+import fetcher from "../components/fetcher";
 
 export default function ReadyToShip() {
-  const fiveGridData = {
-    title: "Ready-to-Ship Styles",
-    main: {
-      title: "Banarasi Sarees",
-      src: "/sarees/banarasi.jpg",
-    },
-    topLeft: {
-      title: "Sharara Suits",
-      src: "/sarees/sharara.jpg",
-    },
-    bottomLeft: {
-      title: "Evening Gowns",
-      src: "/sarees/evening.jpg",
-    },
-    topRight: {
-      title: "Kanchipuram Sarees",
-      src: "/sarees/kanchipuram.jpg",
-    },
-    bottomRight: {
-      title: "Party Wear Lehengas",
-      src: "/sarees/party.jpg",
-    },
-  };
-
+  const { data, error } = useSWR("/api/homepage/readyToShip", fetcher);
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
   return (
     <div>
-      <FiveGridStyle data={fiveGridData} />
+      <FiveGridStyle data={data} />
     </div>
   );
 }

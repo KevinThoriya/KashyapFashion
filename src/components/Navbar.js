@@ -42,7 +42,7 @@ const Navbar = () => {
   return (
     <>
       <AppBar
-        position="static"
+        position="sticky"
         color="primary"
         elevation={0}
         sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
