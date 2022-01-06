@@ -6,19 +6,7 @@ import "react-multi-carousel/lib/styles.css";
 
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-export function ProductShortView({ name, src, price, currency }) {
-  return (
-    <div className="">
-      <img src={src} alt={name} className="cornerImage m-auto" />
-      <Typography variant="body1" align="center" className="my-1">
-        {name}
-      </Typography>
-      <Typography variant="h6" align="center" className="my-1">
-        {`${currency} ${price}`}
-      </Typography>
-    </div>
-  );
-}
+import { ProductShortView } from "./ProductShortView";
 
 const responsive = {
   desktop: {
