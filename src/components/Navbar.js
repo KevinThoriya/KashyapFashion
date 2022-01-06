@@ -122,8 +122,8 @@ const SignIn = ({ onSignup }) => {
             <Box
               component="form"
               noValidate
-              onSubmit={() => {
-                alert("submit ");
+              onSubmit={(e) => {
+                e.preventDefault();
               }}
               sx={{ mt: 1 }}
             >
@@ -222,8 +222,8 @@ const SignUp = ({ onSignIn }) => {
             <Box
               component="form"
               noValidate
-              onSubmit={() => {
-                alert("submit ");
+              onSubmit={(e) => {
+                e.preventDefault();
               }}
               sx={{ mt: 1 }}
             >
