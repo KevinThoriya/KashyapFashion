@@ -22,6 +22,8 @@ a {
 .cornerImage {
   width: 20rem;
   height: 30rem;
+  transition: opacity 0.5s linear;
+  opacity: 1;
 }
 .mainImage {
   height: calc(100% - 32px);

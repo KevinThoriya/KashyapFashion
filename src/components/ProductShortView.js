@@ -9,19 +9,20 @@ export function ProductShortView({
   currency,
   zoomSrc: zoomSrc,
 }) {
-  const imageRef = useRef(null);
-  const [src, setSrc] = useState(url);
-  const ShowImageZoom = () => setSrc(zoomSrc || url);
-  const showRegularImage = () => setSrc(url);
+  const [zoomed, setZoomed] = useState(false);
+  const ShowImageZoom = () => setZoomed(true);
+  const showRegularImage = () => setZoomed(false);
 
   return (
     <div className="">
       <div onMouseEnter={ShowImageZoom} onMouseLeave={showRegularImage}>
+        <img src={url} alt={name} className="cornerImage m-auto" />
         <img
-          ref={imageRef}
-          src={src}
+          src={zoomSrc || url}
           alt={name}
-          className="cornerImage m-auto"
+          className={`cornerImage m-auto absolute left-0 right-0 top-0 opacity-${
+            zoomed ? 1 : 0
+          } `}
         />
       </div>
       <Typography variant="body1" align="center" className="my-1">
