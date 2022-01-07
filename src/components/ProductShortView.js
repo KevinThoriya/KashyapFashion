@@ -20,9 +20,8 @@ export function ProductShortView({
         <img
           src={zoomSrc || url}
           alt={name}
-          className={`cornerImage m-auto absolute left-0 right-0 top-0 opacity-${
-            zoomed ? 1 : 0
-          } `}
+          style={{ opacity: zoomed ? 1 : 0 }}
+          className={`cornerImage m-auto absolute left-0 right-0 top-0 `}
         />
       </div>
       <Typography variant="body1" align="center" className="my-1">
