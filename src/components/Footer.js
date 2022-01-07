@@ -72,7 +72,7 @@ export default function Footer() {
         <Toolbar>
           <div className="w-full">
             <Typography variant="body1" align="center">
-              © 2022 smyankk
+              © 2022 Kashyap Fashion
             </Typography>
           </div>
         </Toolbar>
