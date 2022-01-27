@@ -28,3 +28,7 @@ a {
 .mainImage {
   height: calc(100% - 32px);
 }
+
+.h-50rem {
+  height: 50rem;
+}

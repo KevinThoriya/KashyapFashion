@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { IconButton, Typography } from "@mui/material";
+import Link from "next/link";
 import React, { useRef, useState } from "react";
 
 export function ProductShortView({
@@ -24,9 +25,20 @@ export function ProductShortView({
           className={`cornerImage m-auto absolute left-0 right-0 top-0 `}
         />
       </div>
-      <Typography variant="body1" align="center" className="my-1">
-        {name}
-      </Typography>
+      <Link
+        href={`/product/${encodeURIComponent(name)}`}
+        passHref
+        className="cursor-pointer"
+        as={`/product/${name}`}
+      >
+        <Typography
+          variant="body1"
+          align="center"
+          className="my-1 cursor-pointer"
+        >
+          {name}
+        </Typography>
+      </Link>
       <Typography variant="h6" align="center" className="my-1">
         {`${currency} ${price}`}
       </Typography>

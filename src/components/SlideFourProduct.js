@@ -26,7 +26,10 @@ const responsive = {
   },
 };
 
-export default function SlideFourProduct({ data: { title, data } }) {
+export default function SlideFourProduct({
+  data: { title, data },
+  sidePadding = true,
+}) {
   const carousalRef = useRef(null);
   const next = () => {
     console.log(carousalRef);
@@ -37,7 +40,7 @@ export default function SlideFourProduct({ data: { title, data } }) {
     carousalRef.current.previous();
   };
   return (
-    <div className="pt-4 lg:px-60 ">
+    <div className={`pt-4 ${sidePadding ? "lg:px-60" : ""}`}>
       <div className="absolute right-60 ">
         <IconButton onClick={prev}>
           <ArrowBackIosNewIcon />
