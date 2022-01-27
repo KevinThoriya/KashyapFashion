@@ -16,7 +16,7 @@ import Navbar from "../../src/components/Navbar";
 import SBreadcrumb from "../../src/components/SBreadcrumb";
 import ReactThemeProvider from "../../src/components/ThemeProvider";
 import Footer from "../../src/components/Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShareIcon from "@mui/icons-material/Share";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -122,6 +122,9 @@ export default function Category() {
   const [selectedPhoto, setSelectedPhoto] = useState(
     productDetail && productDetail?.photos[0]
   );
+  useEffect(() => {
+    if (productDetail?.photos) setSelectedPhoto(productDetail?.photos[0]);
+  }, [productDetail]);
   const [tabValue, handleTabChange] = useState(0);
   return (
     <ReactThemeProvider>
