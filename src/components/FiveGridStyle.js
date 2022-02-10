@@ -1,10 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import { Typography } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export function Poster({ title, src, main }) {
   return (
+    <Link
+          href={`/${encodeURIComponent(title)}`}
+          passHref
+          className="cursor-pointer"
+          as={`/${title}`}
+        >
     <div className="w-full h-full cursor-pointer">
       <img
         src={src}
@@ -14,7 +21,8 @@ export function Poster({ title, src, main }) {
       <Typography variant="body1" align="center" className="my-1">
         {title}
       </Typography>
-    </div>
+      </div>
+      </Link>
   );
 }
 

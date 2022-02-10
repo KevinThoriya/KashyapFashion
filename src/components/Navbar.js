@@ -12,6 +12,7 @@ import WhatsappRoundedIcon from "@mui/icons-material/WhatsappRounded";
 import LoginSignupModal from "./LoginSignupModal";
 import CartModal from "./cartModal";
 import SearchModal from "./SearchModal";
+import Link from "next/link";
 
 const Navbar = () => {
   const WpUrl = "https://api.whatsapp.com/send?phone=917829928490";
@@ -33,10 +34,18 @@ const Navbar = () => {
         className="navbar lg:px-60"
       >
         <Toolbar sx={{ flexWrap: "wrap" }}>
+        <Link
+          href={`/`}
+          passHref
+          className="cursor-pointer"
+          as={`/`}
+        >
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
             {/* <Image src="/logo.png" width={100} height={60} alt="logo" /> */}
             <img src="/logo.png" alt="logo" className="w-24" />
-          </Typography>
+            </Typography>
+            
+            </Link>
           <nav className="flex flex-row-reverse space-x-0.5 space-x-reverse">
             <IconButton
               onClick={toggleCart}
