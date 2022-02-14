@@ -23,7 +23,7 @@ const Navbar = () => {
   const toggleCart = () => setCartDialog(!cartDialog);
   const toggleLogin = () => setLoginDialog(!loginDialog);
   const toggleSearch = () => setSearchDialog(!searchDialog);
-
+  
   return (
     <>
       <AppBar
