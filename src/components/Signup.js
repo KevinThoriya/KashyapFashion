@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
+import * as Yup from "yup";
 
 import {
   Checkbox,
@@ -11,8 +12,47 @@ import {
   Grid,
   TextField,
 } from "@mui/material";
+import { useFormik } from "formik";
+import TextInput from "./TextInput";
+import axios from "axios";
+import Routes from "./Routes";
+
+const SignUpValidationSchema = Yup.object().shape({
+  email: Yup.string().email().required("Required"),
+  firstName: Yup.string().required("Required"),
+  lastName: Yup.string().required("Required"),
+  mobile: Yup.number().required("Required"),
+  password: Yup.string()
+    .required("Password is required")
+    .min(4, "minimum 4 letter required."),
+  ConfirmPassword: Yup.string().oneOf(
+    [Yup.ref("password"), null],
+    "Passwords must match"
+  ),
+});
 
 const SignUp = ({ onSignIn }) => {
+  const { data, error } = useSWr("/api/homepage/readyToShip", fetcher);
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      firstName: "",
+      lastName: "",
+      mobile: "",
+      password: "",
+      ConfirmPassword: "",
+    },
+    validationSchema: SignUpValidationSchema,
+    enableReinitialize: true,
+    onSubmit: async (values, { setSubmitting }) => {
+      const res = axios.post(Routes.SignUp, values);
+      console.log(res);
+    },
+  });
+
+  const { values, getFieldProps, errors, touched, submitForm } = formik;
+
   return (
     <div className="flex-1 overflow-scroll">
       <Grid container component="main" className="h-full">
@@ -57,49 +97,45 @@ const SignUp = ({ onSignIn }) => {
               }}
               sx={{ mt: 1 }}
             >
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
+              <TextInput
                 name="email"
-                autoComplete="email"
                 autoFocus
+                placeholder="Email Address"
+                {...getFieldProps("email")}
+                error={touched.email && errors.email}
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
+              <TextInput
+                placeholder="First Name"
                 name="firstName"
+                {...getFieldProps("firstName")}
+                error={touched.firstName && errors.firstName}
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
+              <TextInput
+                placeholder="Last Name"
                 name="lastName"
+                {...getFieldProps("lastName")}
+                error={touched.lastName && errors.lastName}
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
+              <TextInput
+                type="number"
+                min={10}
+                max={10}
+                name="mobile"
+                {...getFieldProps("mobile")}
+                error={touched.mobile && errors.mobile}
+              />
+              <TextInput
                 name="password"
-                label="Password"
                 type="password"
-                id="password"
+                {...getFieldProps("password")}
+                error={touched.password && errors.password}
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="ConfirmPassword"
-                label="Confirm Password"
+              <TextInput
+                placeholder="Confirm Password"
                 type="password"
-                id="ConfirmPassword"
+                name="ConfirmPassword"
+                {...getFieldProps("ConfirmPassword")}
+                error={touched.ConfirmPassword && errors.ConfirmPassword}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -111,6 +147,7 @@ const SignUp = ({ onSignIn }) => {
                 color="primary"
                 variant="outlined"
                 sx={{ mt: 3, mb: 2, p: 1 }}
+                onClick={submitForm}
               >
                 Sign UP
               </Button>

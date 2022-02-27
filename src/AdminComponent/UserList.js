@@ -6,7 +6,9 @@ const UserList = (props) => {
           <Datagrid>
               <TextField source="id" />
               <TextField source="name" />
-                <TextField source="email" />
+                <TextField source="price" />
+                <TextField source="price" />
+
             </Datagrid>
       </List>
   )

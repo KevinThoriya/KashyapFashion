@@ -258,7 +258,7 @@ export default function Category() {
     return (
       <div className="grid grid-cols-3 gap-4 p-4">
         {filterProducts.map((product) => (
-          <ProductShortView {...product} theme="cardLayout" />
+          <ProductShortView {...product} key={product.id} theme="cardLayout" />
         ))}
       </div>
     )

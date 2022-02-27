@@ -14,10 +14,9 @@
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.6",
     "@prisma/client": "^3.9.2",
-    "@ra-data-prisma/dataprovider": "^6.9.0",
-    "graphql": "^16.3.0",
+    "axios": "^0.26.0",
+    "formik": "^2.2.9",
     "next": "12.0.7",
-    "ra-data-graphql": "^3.19.10",
     "ra-data-simple-rest": "^3.19.10",
     "react": "17.0.2",
     "react-admin": "^3.19.10",
@@ -25,7 +24,8 @@
     "react-multi-carousel": "^2.6.5",
     "react-responsive-carousel": "^3.2.22",
     "styled-components": "^5.3.3",
-    "swr": "^1.1.2"
+    "swr": "^1.1.2",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.1",

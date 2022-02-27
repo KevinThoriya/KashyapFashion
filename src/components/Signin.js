@@ -12,7 +12,33 @@ import {
   TextField,
 } from "@mui/material";
 
+import { useFormik } from "formik";
+import TextInput from "./TextInput";
+import * as Yup from "yup";
+import axios from "axios";
+import Routes from "./Routes";
+
+const SignInValidationSchema = Yup.object().shape({
+  email: Yup.string().email().required("Required"),
+  password: Yup.string().required("Required"),
+});
+
 const SignIn = ({ onSignup }) => {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: SignInValidationSchema,
+    enableReinitialize: true,
+    onSubmit: async (values, { setSubmitting }) => {
+      const res = axios.post(Routes.SignIn, values);
+      console.log(res);
+    },
+  });
+
+  const { values, getFieldProps, errors, touched, submitForm } = formik;
+
   return (
     <div className=" overflow-scroll flex-1">
       <Grid container component="main" className="h-full">
@@ -57,35 +83,26 @@ const SignIn = ({ onSignup }) => {
               }}
               sx={{ mt: 1 }}
             >
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
+              <TextInput
                 name="email"
-                autoComplete="email"
                 autoFocus
+                placeholder="Email Address"
+                {...getFieldProps("email")}
+                error={touched.email && errors.email}
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
+              <TextInput
                 name="password"
-                label="Password"
                 type="password"
-                id="password"
-                autoComplete="current-password"
+                {...getFieldProps("password")}
+                error={touched.password && errors.password}
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
+
               <Button
                 type="submit"
                 fullWidth
                 color="primary"
                 variant="outlined"
+                onClick={submitForm}
                 sx={{ mt: 3, mb: 2, p: 1 }}
               >
                 Sign In

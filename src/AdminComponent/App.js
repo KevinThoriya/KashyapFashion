@@ -8,7 +8,7 @@ import Head from "next/head";
 import ReactThemeProvider from '../components/ThemeProvider'
 import dynamic from "next/dynamic"
 import { useDataProvider } from "@ra-data-prisma/dataprovider"
-
+import { theme } from '../components//ThemeProvider';
 
 
 
@@ -23,8 +23,10 @@ const App = () => {
           <title>Search for best sarees</title>
         </Head>
 
-        <Admin >
-            <Resource name="users" list={UserList} />
+        <Admin theme={theme} dataProvider={simpleRestProvider('http://localhost:3000/api/homepage')} >
+          {/* <Resource name="users" list={UserList} /> */}
+          
+          <Resource name="trending" list={UserList} />
         </Admin>
       </div>
     </ReactThemeProvider>
