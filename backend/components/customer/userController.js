@@ -1,5 +1,6 @@
-import { serverError, Success } from "../../utils/helper.js";
-import { addUser } from "./userModel.js";
+import { Error, serverError, Success } from "../../utils/helper.js";
+import { addUser, getUser } from "./userModel.js";
+import bcrypt from 'bcrypt';
 
 export const signUpUser = async (req,res) => {
     try {
@@ -15,6 +16,30 @@ export const signUpUser = async (req,res) => {
         
         return Success(res, "User Sign Up Successfully !!!", body);
     } catch (error) {
-        serverError(error);
+        serverError(res);
+    }
+}
+
+export const loginUser = async (req,res) => {
+    try {
+        let {email,password} = req.body;
+
+        let getData = await getUser(['email','password','salt'],{
+            email: email
+        });
+        
+        if (getData === null) {
+            return Error(res, 'User does not exist ...');
+        }
+
+        let matchPassword = await bcrypt.compare(password, getData.password);
+
+        if (!matchPassword) {
+            return Error(res, 'Invalid Password !!!');
+        }
+
+        return Success(res,'Login Successfull ...');
+    } catch (error) {
+        serverError(res);
     }
 }
