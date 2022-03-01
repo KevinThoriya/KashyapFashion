@@ -17,6 +17,7 @@ import TextInput from "./TextInput";
 import * as Yup from "yup";
 import axios from "axios";
 import Routes from "./Routes";
+import { useSnackbar } from "notistack";
 
 const SignInValidationSchema = Yup.object().shape({
   email: Yup.string().email().required("Required"),
@@ -25,10 +26,11 @@ const SignInValidationSchema = Yup.object().shape({
 
 
 const SignIn = ({ onSignup, closeModal }) => {
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const onSuccess = (res) => { 
     let userData = res.payload;
-    alert(res.message);
+    enqueueSnackbar(res.message, {variant: 'success'});
     console.log(userData);
     closeModal();
   }
@@ -42,8 +44,8 @@ const SignIn = ({ onSignup, closeModal }) => {
     enableReinitialize: true,
     onSubmit: async (values) => {
       const res = await axios.post(Routes.SignIn, values);
-      if (res.status == 200) onSuccess(res.data);
-      else alert(res.message);
+      if (res.data.status == 200) onSuccess(res.data);
+      else enqueueSnackbar(res.message, { variant: 'error' });
     },
   });
 
@@ -58,7 +60,7 @@ const SignIn = ({ onSignup, closeModal }) => {
           xs={false}
           sm={4}
           md={7}
-          sx={{
+          wsx={{
             backgroundImage: "url(https://source.unsplash.com/random)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>

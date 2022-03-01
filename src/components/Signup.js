@@ -16,6 +16,7 @@ import { useFormik } from "formik";
 import TextInput from "./TextInput";
 import axios from "axios";
 import Routes from "./Routes";
+import { useSnackbar } from "notistack";
 
 const SignUpValidationSchema = Yup.object().shape({
   email: Yup.string().email().required("Required"),
@@ -32,6 +33,20 @@ const SignUpValidationSchema = Yup.object().shape({
 });
 
 const SignUp = ({ onSignIn, closeModal }) => {
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  const onSuccess = (res) => { 
+    let userData = res.payload;
+    enqueueSnackbar(res.message, {variant: 'success'});
+    console.log(userData);
+    closeModal();
+  }
+
+  const onError = (data) => { 
+    enqueueSnackbar(data.message, { variant: 'error' });
+    console.log("error payload",data.payload);
+  }
+
 
   const formik = useFormik({
     initialValues: {
@@ -44,15 +59,16 @@ const SignUp = ({ onSignIn, closeModal }) => {
     },
     validationSchema: SignUpValidationSchema,
     enableReinitialize: true,
-    onSubmit: async (values, { setSubmitting }) => {
-      const res = axios.post(Routes.SignUp, {
-        firstname : values.firstName,
+    onSubmit: async (values) => {
+      const res = await axios.post(Routes.SignUp, {
+        firstname: values.firstName,
         lastname: values.lastName,
         email: values.email,
         password_hash: values.password,
         mobile: values.mobile,
       });
-      console.log(res);
+      if (res.data.status == 200) return onSuccess(res.data);
+      else if (res.data.status == 400) return onError(res.data);
     },
   });
 

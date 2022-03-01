@@ -7,19 +7,22 @@ export const Success = (res,message,data) => {
         "payload": data
     }
 
-    return res.status(SUCCESS).json(successData);
+    return res.status(200).json(successData);
 }
 
-export const Error = (res,message) => {
+export const Error = (res, message, payload = {}) => {
     return res.status(200).json({
         "status": ERROR,
-        "message": message
+        "message": message,
+        payload : payload,
     })
 }
 
-export const serverError = (res) => {
+export const serverError = (res, message, payload = {}) => {
     return res.status(200).json({
         "status": SERVER_ERROR,
-        "message": "Server Error"
+        "message": message,
+        payload : payload,
+
     })
 }

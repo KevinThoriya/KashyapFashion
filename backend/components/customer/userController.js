@@ -3,7 +3,7 @@ import { addUser, getUser } from "./userModel.js";
 import bcrypt from 'bcrypt';
 
 export const signUpUser = async (req, res) => {
-    console.log(req.body);
+    console.log("sign up => ",req.body);
     try {
         let body = req.body;
         body.firstname = body.firstname;
@@ -17,7 +17,7 @@ export const signUpUser = async (req, res) => {
         
     } catch (error) {
         console.log("errors ", error);
-        serverError(res);
+        serverError(res, "server Error !", {error : error.message});
     }
 }
 
@@ -47,6 +47,6 @@ export const loginUser = async (req,res) => {
         
     } catch (error) {
         console.log("errors ", error);
-        serverError(res);
+        serverError(res, 'Server Error !', error.message);
     }
 }
