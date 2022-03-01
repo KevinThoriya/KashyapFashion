@@ -3,16 +3,10 @@ import * as React from "react";
 
 import { Admin, Resource } from 'react-admin';
 import simpleRestProvider from 'ra-data-simple-rest';
-import UserList from './UserList';
+import UserList, { UserCreate, UserEdit } from './UserList';
 import Head from "next/head";
 import ReactThemeProvider from '../components/ThemeProvider'
-import dynamic from "next/dynamic"
-import { useDataProvider } from "@ra-data-prisma/dataprovider"
 import { theme } from '../components//ThemeProvider';
-
-
-
-
 
 const App = () => {
 
@@ -23,10 +17,10 @@ const App = () => {
           <title>Search for best sarees</title>
         </Head>
 
-        <Admin theme={theme} dataProvider={simpleRestProvider('http://localhost:3000/api/homepage')} >
+        <Admin disableTelemetry title="Kashyap Fashion"  theme={theme} dataProvider={simpleRestProvider('http://localhost:3000/admin')} >
           {/* <Resource name="users" list={UserList} /> */}
           
-          <Resource name="trending" list={UserList} />
+          <Resource name="users" list={UserList} create={UserCreate} edit={UserEdit} />
         </Admin>
       </div>
     </ReactThemeProvider>

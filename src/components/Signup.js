@@ -32,7 +32,6 @@ const SignUpValidationSchema = Yup.object().shape({
 });
 
 const SignUp = ({ onSignIn }) => {
-  const { data, error } = useSWr("/api/homepage/readyToShip", fetcher);
 
   const formik = useFormik({
     initialValues: {
@@ -46,7 +45,13 @@ const SignUp = ({ onSignIn }) => {
     validationSchema: SignUpValidationSchema,
     enableReinitialize: true,
     onSubmit: async (values, { setSubmitting }) => {
-      const res = axios.post(Routes.SignUp, values);
+      const res = axios.post(Routes.SignUp, {
+        firstname : values.firstName,
+        lastname: values.lastName,
+        email: values.email,
+        password_hash: values.password,
+        mobile: values.mobile,
+      });
       console.log(res);
     },
   });

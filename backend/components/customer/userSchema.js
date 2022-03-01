@@ -23,15 +23,15 @@ User.init(
     },
     salt: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     password_hash: {
       type: DataTypes.VIRTUAL,
-      allowNull: false,
+      allowNull: true,
       set(value) {
         let salt = bcrypt.genSaltSync(10);
         let hashPassword = bcrypt.hashSync(value, salt);

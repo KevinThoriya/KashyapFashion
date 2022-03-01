@@ -2,7 +2,8 @@ import { Error, serverError, Success } from "../../utils/helper.js";
 import { addUser, getUser } from "./userModel.js";
 import bcrypt from 'bcrypt';
 
-export const signUpUser = async (req,res) => {
+export const signUpUser = async (req, res) => {
+    console.log(req.body);
     try {
         let body = req.body;
         
@@ -16,6 +17,7 @@ export const signUpUser = async (req,res) => {
         
         return Success(res, "User Sign Up Successfully !!!", body);
     } catch (error) {
+        console.log("errors ", error);
         serverError(res);
     }
 }
