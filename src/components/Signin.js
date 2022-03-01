@@ -23,7 +23,16 @@ const SignInValidationSchema = Yup.object().shape({
   password: Yup.string().required("Required"),
 });
 
-const SignIn = ({ onSignup }) => {
+
+const SignIn = ({ onSignup, closeModal }) => {
+
+  const onSuccess = (res) => { 
+    let userData = res.payload;
+    alert(res.message);
+    console.log(userData);
+    closeModal();
+  }
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -31,9 +40,10 @@ const SignIn = ({ onSignup }) => {
     },
     validationSchema: SignInValidationSchema,
     enableReinitialize: true,
-    onSubmit: async (values, { setSubmitting }) => {
-      const res = axios.post(Routes.SignIn, values);
-      console.log(res);
+    onSubmit: async (values) => {
+      const res = await axios.post(Routes.SignIn, values);
+      if (res.status == 200) onSuccess(res.data);
+      else alert(res.message);
     },
   });
 

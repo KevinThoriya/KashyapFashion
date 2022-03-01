@@ -31,7 +31,7 @@ const SignUpValidationSchema = Yup.object().shape({
   ),
 });
 
-const SignUp = ({ onSignIn }) => {
+const SignUp = ({ onSignIn, closeModal }) => {
 
   const formik = useFormik({
     initialValues: {

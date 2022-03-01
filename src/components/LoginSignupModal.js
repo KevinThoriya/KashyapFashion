@@ -19,9 +19,9 @@ const LoginSignupModal = ({ open, close }) => {
       <>
         <div className="bg-gray-50 rounded-lg h-full w-full sm:h-5/6 sm:w-4/6 flex self-center bg-white-300 flex-row border-4 border-gray-200">
           {signup ? (
-            <SignUp onSignIn={() => setSignup(false)} />
+            <SignUp onSignIn={() => setSignup(false)} closeModal={close} />
           ) : (
-            <SignIn onSignup={() => setSignup(true)} />
+              <SignIn onSignup={() => setSignup(true)} closeModal={close} />
           )}
         </div>
         <div className="absolute right-2 top-2 ">

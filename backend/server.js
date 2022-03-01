@@ -34,4 +34,4 @@ app.listen(PORT, () => {
   }
 })();
 
-sequelize.sync({ alter : true})
+sequelize.sync({ alter: true })

@@ -95,7 +95,7 @@ export const UserCreate = (props) => {
       <TextInput formClassName={classes.last_name} source="lastname" validate={required()} />
       <TextInput formClassName={classes.email} source="email" validate={required()} />
       <TextInput source="mobile" validate={required()} />
-      <TextInput source="password" validate={required()} type="password" />
+          <TextInput InputProps={{ label: 'Password'}} source="password_hash" validate={required()} type="password" />
       {/* <RichTextInput source="bio" />
       <DateInput label="Publication date" source="published_at" defaultValue={new Date()} /> */}
   </SimpleForm>
