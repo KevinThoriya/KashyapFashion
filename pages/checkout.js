@@ -2,18 +2,18 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import {
-    Button,
-    Checkbox,
-    Divider,
-    Input,
-    MenuItem,
-    Pagination,
-    Select,
-    Slider,
-    Tab,
-    Tabs,
-    TextareaAutosize,
-    Typography,
+  Button,
+  Checkbox,
+  Divider,
+  Input,
+  MenuItem,
+  Pagination,
+  Select,
+  Slider,
+  Tab,
+  Tabs,
+  TextareaAutosize,
+  Typography,
 } from '@mui/material'
 import Navbar from '../src/components/Navbar'
 import SBreadcrumb from '../src/components/SBreadcrumb'
@@ -37,55 +37,42 @@ import useSWR from 'swr'
 import fetcher from '../src/components/fetcher'
 import { ProductShortView } from '../src/components/ProductShortView'
 import CartList from '../src/components/CartList'
+import { Providers } from '.'
 
 export default function Category() {
-    const router = useRouter()
+  const router = useRouter()
 
-    const { data: productDetail, error } = useSWR(`/api/checkout`, fetcher)
+  const { data: productDetail, error } = useSWR(`/api/checkout`, fetcher)
 
+  const breadcrumb = [
+    {
+      name: 'Home',
+      href: '/',
+    },
+    {
+      name: 'Checkout',
+      href: `/checkout`,
+    },
+  ]
 
-
-    const breadcrumb = [
-        {
-            name: 'Home',
-            href: '/',
-        },
-        {
-            name: 'Checkout',
-            href: `/checkout`,
-        },
-    ]
-
-    return (
-        <ReactThemeProvider>
-            <div className="">
-                <Head>
-                    <title>Search for best sarees</title>
-                </Head>
-
-                <main className="">
-                    <Navbar />
-                    <div className="lg:px-60 mt-14 flex ">
-                        <div className='flex-1'>
-                            <Typography variant='h4' className="font-bold my-4" >
-                                CHECKOUT
-                            </Typography>
-                        </div>
-                        <div className='flex-1'>
-                            <div className="bg-gray-100">
-                            <Typography variant='h5' className="m-4 my-4 pt-2 "  >
-                            ORDER SUMMARY
-                                </Typography>
-                                <CartList />
-                            </div>
-                        </div>
-
-                    </div>
-                </main>
-
-                <Footer />
-            </div>
-        </ReactThemeProvider>
-    )
+  return (
+    <Providers>
+    <Navbar />
+      <div className="lg:px-60 mt-14 flex ">
+        <div className="flex-1">
+          <Typography variant="h4" className="font-bold my-4">
+            CHECKOUT
+          </Typography>
+        </div>
+        <div className="flex-1">
+          <div className="bg-gray-100">
+            <Typography variant="h5" className="m-4 my-4 pt-2 ">
+              ORDER SUMMARY
+            </Typography>
+            <CartList />
+          </div>
+        </div>
+      </div>
+    </Providers>
+  )
 }
-

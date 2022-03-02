@@ -2,6 +2,19 @@ import { Error, serverError, Success } from "../../utils/helper.js";
 import { addUser, getUser } from "./userModel.js";
 import bcrypt from 'bcrypt';
 
+const loginSuccess = (res, user) => {
+    const { dataValues } = user; 
+    let name = dataValues.firstname + " " + dataValues.lastname;    
+    let userDetail = {...dataValues,
+        password: undefined,
+        salt: undefined,
+        deletedAt: undefined,
+        createdAt: undefined,
+        name
+    }
+    return Success(res,`Successfully logged as ${name}`, userDetail);
+}
+
 export const signUpUser = async (req, res) => {
     console.log("sign up => ",req.body);
     try {
@@ -11,6 +24,7 @@ export const signUpUser = async (req, res) => {
         body.email = body.email;
         body.password_hash = body.password;
         body.mobile = parseInt(body.mobile);
+        body.name = body.firstname + " " + body.lastname;
         
         await addUser(body);
         return Success(res, "User Sign Up Successfully !!!", body);
@@ -21,17 +35,6 @@ export const signUpUser = async (req, res) => {
     }
 }
 
-const loginSuccess = (res, user) => {
-    const { dataValues } = user; 
-    let userDetail = {...dataValues,
-        password: undefined,
-        salt: undefined,
-        deletedAt: undefined,
-        createdAt: undefined,
-    }
-    let name = userDetail.firstname + " " + userDetail.lastname;    
-    return Success(res,`Successfully logged as ${name}`, userDetail);
-}
 
 export const loginUser = async (req,res) => {
     try {

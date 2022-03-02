@@ -36,6 +36,7 @@ import SlideFourProduct from '../src/components/SlideFourProduct'
 import useSWR from 'swr'
 import fetcher from '../src/components/fetcher'
 import { ProductShortView } from '../src/components/ProductShortView'
+import { Providers } from '.'
 
 function valuetext(value) {
   return `${value * 100}`
@@ -253,7 +254,8 @@ export default function Category() {
       zoomSrc: '/Trending/1_zoom.png',
     },
   ]
-  let catDec = '           Banarasi sarees are one of the sensational traditional textiles which have made a remarkable impression from the city of Varanasi. The original banarasi silk saree has retained the imperial component made out of the silver yarns given the gold polish. These banarasi silk sarees are the cardinal hunk of the Indian women’s trousseau. This quintessential silk has thrived an eccentric fashion around the globe with the super-eminent rank of the ethereal elegance.“Samyakk” has the diversified collection of banarasi silk sarees that includes Banarasi kora silk sarees, Banarasi georgette sarees, Banarasi tussar silk sarees, Banarasi bamboo silk sarees, Banarasi linen silk sarees, Banarasi satin silk sarees, Banarasi cotton silk saree and Banarasi organza sarees. Original banarasi saree engross the vivacious visage in terms of glaring real gold zari woven motifs from the mughal influence like flora & fauna, paisley patterns, contrast border and pallu with intricate butta detailing. The splendid color spectrum of dual tones, contrast combinations, always endorses a dexterous gander to this 6 yard engrossing drape.Accentuate your banarasi silk saree debut for the impeccable decorum by pairing it with antique jewel pieces, trending uncut stone jewelry/traditional temple jewelry. Combine your trendy banarasi organza sarees with the blouse patterns such as the long length sleeves, corset blouse or jacket blouse with lapels, boat necklines and backless with ornamental embroidery. Drape your banarasi cotton silk saree in such a way that you showoff your blouse too along with the saree. Furbish on to the comfortable and stone studded footwear to compliment the ensemble that will makes the wearer look like a sculpture of the ethnic etiquette for the royal regime. Leaf through banarasi silk saree online collection for a numerous styles. Samyakk’s e-commerce shopping portal has made your banarasi silk saree online search easier. Now you can go through magnificent collection of banarasi silk saree online in the vast abundance of Samyakk for a gorgeous original banarasi saree, contemporary banarasi cotton silk saree and luxurious collection of banarasi organza sarees in myriad of colors and designs. “Samyakk” has made a remarkable network not only in India but has crossed the barriers spreading its essence internationally too connecting to our happy customers in UAE, USA, UK, Canada, Australia,Mauritius & Singapore. The team feels grateful to receive such massive support & affection towards the brand and we assure to delight you further in future.'
+  let catDec =
+    '           Banarasi sarees are one of the sensational traditional textiles which have made a remarkable impression from the city of Varanasi. The original banarasi silk saree has retained the imperial component made out of the silver yarns given the gold polish. These banarasi silk sarees are the cardinal hunk of the Indian women’s trousseau. This quintessential silk has thrived an eccentric fashion around the globe with the super-eminent rank of the ethereal elegance.“Samyakk” has the diversified collection of banarasi silk sarees that includes Banarasi kora silk sarees, Banarasi georgette sarees, Banarasi tussar silk sarees, Banarasi bamboo silk sarees, Banarasi linen silk sarees, Banarasi satin silk sarees, Banarasi cotton silk saree and Banarasi organza sarees. Original banarasi saree engross the vivacious visage in terms of glaring real gold zari woven motifs from the mughal influence like flora & fauna, paisley patterns, contrast border and pallu with intricate butta detailing. The splendid color spectrum of dual tones, contrast combinations, always endorses a dexterous gander to this 6 yard engrossing drape.Accentuate your banarasi silk saree debut for the impeccable decorum by pairing it with antique jewel pieces, trending uncut stone jewelry/traditional temple jewelry. Combine your trendy banarasi organza sarees with the blouse patterns such as the long length sleeves, corset blouse or jacket blouse with lapels, boat necklines and backless with ornamental embroidery. Drape your banarasi cotton silk saree in such a way that you showoff your blouse too along with the saree. Furbish on to the comfortable and stone studded footwear to compliment the ensemble that will makes the wearer look like a sculpture of the ethnic etiquette for the royal regime. Leaf through banarasi silk saree online collection for a numerous styles. Samyakk’s e-commerce shopping portal has made your banarasi silk saree online search easier. Now you can go through magnificent collection of banarasi silk saree online in the vast abundance of Samyakk for a gorgeous original banarasi saree, contemporary banarasi cotton silk saree and luxurious collection of banarasi organza sarees in myriad of colors and designs. “Samyakk” has made a remarkable network not only in India but has crossed the barriers spreading its essence internationally too connecting to our happy customers in UAE, USA, UK, Canada, Australia,Mauritius & Singapore. The team feels grateful to receive such massive support & affection towards the brand and we assure to delight you further in future.'
   const renderFilterProducts = () => {
     return (
       <div className="grid grid-cols-3 gap-4 p-4">
@@ -268,89 +270,84 @@ export default function Category() {
     <Pagination count={30} color="primary" defaultPage={0} siblingCount={1} />
   )
   return (
-    <ReactThemeProvider>
-      <div className={{}}>
-        <Head>
-          <title>Search for best sarees</title>
-        </Head>
-
-        <main className={{}}>
-          <Navbar />
-          <div className="lg:px-60 mt-10">
-            <SBreadcrumb data={breadcrumb} />
-            <Typography variant="h4" className="my-4">
-              {catSlug}
+    <Providers>
+    <Navbar />
+      <div className="lg:px-60 mt-10">
+        <SBreadcrumb data={breadcrumb} />
+        <Typography variant="h4" className="my-4">
+          {catSlug}
+        </Typography>
+        <div className="flex justify-around flex-row ">
+          <div className="flex-1">
+            <Typography variant="h6" className="">
+              Filters
             </Typography>
-            <div className="flex justify-around flex-row ">
-              <div className="flex-1">
-                <Typography variant="h6" className="">
-                  Filters
-                </Typography>
-              </div>
-              <div className="flex-1 flex justify-center">{pagination}</div>
-              <div className="flex-1 flex justify-end">
-                <Typography variant="body1" className="mr-2">
-                  Sort By :
-                  <Select className="w-40" size="small">
-                    {(sortBy || []).map((unit) => (
-                      <MenuItem value={unit} key={unit}>
-                        {unit}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </Typography>
-              </div>
-            </div>
-
-            <div className="flex border-t border-black-dull mt-2 border-b">
-              <div className="border-r border-black-dull" style={{ flex: 0.3 }}>
-                <div className="border-b border-black-dull pb-3 ">
-                  <Typography variant="body1" className="my-4">
-                    Price
-                  </Typography>
-                  <div className="flex justify-center">
-                    <Box sx={{ width: 300 }}>
-                      <Slider
-                        value={PriceValue}
-                        onChange={handlePriceChange}
-                        valueLabelDisplay="auto"
-                        getAriaValueText={valuetext}
-                        disableSwap
-                        marks={[
-                          { value: 0, label: '$ 5000' },
-                          { value: 100, label: '$ 143000' },
-                        ]}
-                      />
-                    </Box>
-                  </div>
-                </div>
-                {filters.map((filter) => (
-                  <Filter
-                    title={filter.title}
-                    filterData={filter.data}
-                    key={filter.title}
-                  />
-                ))}
-              </div>
-              <div className="flex-1" style={{ flex: 0.7 }}>
-                {renderFilterProducts()}
-                <div className="mt-2 flex justify-center">{pagination}</div>
-              </div>
-            </div>
-            <div className='mt-4'>
-              <Typography variant="body1" className="my-4 text-bold" align='center' style={{ fontWeight : 'bold'}}>
-                {catSlug}
-              </Typography>
-              <Typography variant="body2" className="my-4" align='center'>
-                {catDec}
-                  </Typography>
-            </div>
           </div>
-        </main>
+          <div className="flex-1 flex justify-center">{pagination}</div>
+          <div className="flex-1 flex justify-end">
+            <Typography variant="body1" className="mr-2">
+              Sort By :
+              <Select className="w-40" size="small">
+                {(sortBy || []).map((unit) => (
+                  <MenuItem value={unit} key={unit}>
+                    {unit}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Typography>
+          </div>
+        </div>
 
-        <Footer />
+        <div className="flex border-t border-black-dull mt-2 border-b">
+          <div className="border-r border-black-dull" style={{ flex: 0.3 }}>
+            <div className="border-b border-black-dull pb-3 ">
+              <Typography variant="body1" className="my-4">
+                Price
+              </Typography>
+              <div className="flex justify-center">
+                <Box sx={{ width: 300 }}>
+                  <Slider
+                    value={PriceValue}
+                    onChange={handlePriceChange}
+                    valueLabelDisplay="auto"
+                    getAriaValueText={valuetext}
+                    disableSwap
+                    marks={[
+                      { value: 0, label: '$ 5000' },
+                      { value: 100, label: '$ 143000' },
+                    ]}
+                  />
+                </Box>
+              </div>
+            </div>
+            {filters.map((filter) => (
+              <Filter
+                title={filter.title}
+                filterData={filter.data}
+                key={filter.title}
+              />
+            ))}
+          </div>
+          <div className="flex-1" style={{ flex: 0.7 }}>
+            {renderFilterProducts()}
+            <div className="mt-2 flex justify-center">{pagination}</div>
+          </div>
+        </div>
+        <div className="mt-4">
+          <Typography
+            variant="body1"
+            className="my-4 text-bold"
+            align="center"
+            style={{ fontWeight: 'bold' }}
+          >
+            {catSlug}
+          </Typography>
+          <Typography variant="body2" className="my-4" align="center">
+            {catDec}
+          </Typography>
+        </div>
       </div>
-    </ReactThemeProvider>
+    </Providers>
   )
 }
 

@@ -13,6 +13,7 @@ import LoginSignupModal from "./LoginSignupModal";
 import CartModal from "./cartModal";
 import SearchModal from "./SearchModal";
 import Link from "next/link";
+import useUser from "../Hooks/useUser";
 
 const Navbar = () => {
   const WpUrl = "https://api.whatsapp.com/send?phone=917829928490";
@@ -23,7 +24,8 @@ const Navbar = () => {
   const toggleCart = () => setCartDialog(!cartDialog);
   const toggleLogin = () => setLoginDialog(!loginDialog);
   const toggleSearch = () => setSearchDialog(!searchDialog);
-  
+  const { user } = useUser();
+  console.log("user",user)
   return (
     <>
       <AppBar
@@ -66,18 +68,27 @@ const Navbar = () => {
             <Button variant="text" href={WpUrl}>
               <WhatsappRoundedIcon color="text" />
               <Typography variant="body1" className="ml-2 hidden sm:block">
-                +91 - 7829928490
+                +91 - 7829928490 
               </Typography>
             </Button>
           </nav>
-          <IconButton
+          {!!user?.name ? 
+            <Button
+              variant="text"
+              color="text"
+              className="flex items-center ml-4"
+            >
+              <AccountCircleRoundedIcon color="text" className="mx-2" />
+              {user?.name}
+              </Button>
+          : <IconButton
             onClick={toggleLogin}
             aria-label="account"
             className="ml-3"
             size="large"
           >
             <AccountCircleRoundedIcon color="text" />
-          </IconButton>
+          </IconButton>}
         </Toolbar>
       </AppBar>
       <LoginSignupModal open={loginDialog} close={toggleLogin} />

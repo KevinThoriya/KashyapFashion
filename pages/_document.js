@@ -3,7 +3,7 @@ import React from "react";
 // Import styled components ServerStyleSheet
 import { ServerStyleSheet } from "styled-components";
 import ReactThemeProvider from "../src/components/ThemeProvider";
-
+import { Providers } from '.';
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
     // Step 1: Create an instance of ServerStyleSheet
@@ -37,10 +37,8 @@ export default class MyDocument extends Document {
           />
         </Head>
         <body>
-          <ReactThemeProvider>
             <Main />
             <NextScript />
-          </ReactThemeProvider>
         </body>
       </Html>
     );

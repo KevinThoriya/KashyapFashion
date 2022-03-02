@@ -18,7 +18,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import Routes from "./Routes";
 import { useSnackbar } from "notistack";
-
+import useUser from './../Hooks/useUser';
 const SignInValidationSchema = Yup.object().shape({
   email: Yup.string().email().required("Required"),
   password: Yup.string().required("Required"),
@@ -27,11 +27,12 @@ const SignInValidationSchema = Yup.object().shape({
 
 const SignIn = ({ onSignup, closeModal }) => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-
+  const { setUserState } = useUser();
   const onSuccess = (res) => { 
     let userData = res.payload;
     enqueueSnackbar(res.message, {variant: 'success'});
     console.log(userData);
+    setUserState(userData);
     closeModal();
   }
 

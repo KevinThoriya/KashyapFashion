@@ -18,6 +18,7 @@ import {
   EditButton,
   DeleteButton,
   EmailField,
+  SearchInput,
 
 } from 'react-admin';
 import IconEvent from '@material-ui/icons/Event';
@@ -67,8 +68,9 @@ const ListActions = (props) => {
 };
 
 const userFilters = [
-  <TextInput label="Search FirstName" source="firstname" />,
-  <TextInput label="Search Email" source="email" alwaysOn />,
+    // <SearchInput source="q" alwaysOn />,
+  <SearchInput label="Search FirstName" source="firstname" />,
+  <SearchInput label="Search Email" source="email" alwaysOn autoComplete />,
 ];
 
 const UserList = (props) => {
