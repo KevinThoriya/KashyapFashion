@@ -5,7 +5,7 @@ module.exports = {
     return [
       {
         source: '/admin/:any*',
-        destination: 'http://localhost:3300/admin/:any*',
+        destination: 'http://localhost:3300/kashyap/:any*',
       },
       {
         source: '/customer/:any*',
