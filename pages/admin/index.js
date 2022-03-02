@@ -21,7 +21,6 @@ const App = dynamic(() => import('../../src/AdminComponent/App'), {
 
 const AdminPage = () => (
   <Providers>
-    
     <App />
   </Providers>
 )

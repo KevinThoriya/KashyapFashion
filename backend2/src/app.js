@@ -28,6 +28,7 @@ require("./database/sequelize/connection");
 const pagarMeperiodicCheck = require("./services/pagarMe/periodicCheck");
 const { socketConnection } = require("./websocket/socketConnection");
 const routes = require("./routes");
+const CategoryModel = require("./models/CategoryModel");
 
 const app = express();
 const server = http.createServer(app);
@@ -44,6 +45,7 @@ app.use(routes);
 app.use(errors());
 
 app.use(crud('/kashyap/users', sequelizeCrud(UserModel)))
+app.use(crud('/kashyap/categories', sequelizeCrud(CategoryModel)))
 
 pagarMeperiodicCheck();
 

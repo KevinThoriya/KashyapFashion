@@ -19,6 +19,7 @@ import {
   DeleteButton,
   EmailField,
   SearchInput,
+  email,
 } from 'react-admin'
 import IconEvent from '@material-ui/icons/Event'
 import { makeStyles, Theme } from '@material-ui/core/styles'
@@ -94,7 +95,7 @@ export const UserCreate = (props) => {
         <TextInput
           formClassName={classes.email}
           source="email"
-          validate={required()}
+          validate={[email(), required()]}
         />
         <TextInput source="mobile" validate={required()} />
         <TextInput source="password" validate={required()} type="password" />
@@ -115,7 +116,7 @@ export const UserEdit = (props) => {
           disabled
           source="email"
           label="Email Address"
-          validate={required()}
+          validate={[email(), required()]}
         />
         <TextInput
           fullWidth

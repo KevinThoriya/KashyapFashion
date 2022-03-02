@@ -7,6 +7,7 @@ import UserList, { UserCreate, UserEdit } from './UserList';
 import Head from "next/head";
 import ReactThemeProvider from '../components/ThemeProvider'
 import { theme } from '../components//ThemeProvider';
+import {  CategoryCreate, CategoryEdit, CategoryList } from "./Category";
 
 const App = () => {
 
@@ -14,12 +15,12 @@ const App = () => {
     <ReactThemeProvider>
       <div className={{}}>
         <Head>
-          <title>Search for best sarees</title>
+          <title>Admin</title>
         </Head>
 
         <Admin disableTelemetry title="Kashyap Fashion"  theme={theme} dataProvider={simpleRestProvider('http://localhost:3000/admin')} >
-          {/* <Resource name="users" list={UserList} /> */}  
           <Resource name="users" list={UserList} create={UserCreate} edit={UserEdit} />
+          <Resource name="categories" list={CategoryList} create={CategoryCreate} edit={CategoryEdit} />
         </Admin>
       </div>
     </ReactThemeProvider>

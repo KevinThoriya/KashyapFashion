@@ -10,7 +10,6 @@ class UserModel extends Model {
         super.init({
             name: DataTypes.STRING,
             email: DataTypes.STRING,
-            // cpf: DataTypes.STRING,
             password: DataTypes.STRING,
             admin: DataTypes.BOOLEAN,
             reset_password_token: DataTypes.STRING,
