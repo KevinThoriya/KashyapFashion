@@ -13,7 +13,6 @@ class AddressModel extends Model {
             state: DataTypes.STRING,
             zipcode: DataTypes.STRING,
 
-
         }, {
             tableName: 'addresses',
             sequelize: connection,
