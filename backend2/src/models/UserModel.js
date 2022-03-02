@@ -10,12 +10,12 @@ class UserModel extends Model {
         super.init({
             name: DataTypes.STRING,
             email: DataTypes.STRING,
-            cpf: DataTypes.STRING,
+            // cpf: DataTypes.STRING,
             password: DataTypes.STRING,
             admin: DataTypes.BOOLEAN,
             reset_password_token: DataTypes.STRING,
             reset_password_expires: DataTypes.DATE,
-
+            mobile: DataTypes.STRING,
         }, {
             tableName: 'users',
             sequelize: connection,

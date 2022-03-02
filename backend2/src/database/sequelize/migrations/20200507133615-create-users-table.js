@@ -25,10 +25,9 @@ module.exports = {
                 unique: true
             },
 
-            cpf: {
+            mobile: {
                 type: Sequelize.STRING,
                 allowNull: false,
-                unique: true
             },
 
             password: {

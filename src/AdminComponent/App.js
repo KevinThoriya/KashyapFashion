@@ -18,8 +18,7 @@ const App = () => {
         </Head>
 
         <Admin disableTelemetry title="Kashyap Fashion"  theme={theme} dataProvider={simpleRestProvider('http://localhost:3000/admin')} >
-          {/* <Resource name="users" list={UserList} /> */}
-          
+          {/* <Resource name="users" list={UserList} /> */}  
           <Resource name="users" list={UserList} create={UserCreate} edit={UserEdit} />
         </Admin>
       </div>

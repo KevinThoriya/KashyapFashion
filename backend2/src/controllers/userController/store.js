@@ -3,19 +3,17 @@ const express = require("express");
 const UserModel = require("../../models/UserModel");
 const { sendEmailQueue } = require("../../backgroundJobs/queues");
 const userRegisterTemplate = require("../../services/mailer/templates/userRegisterTemplate");
-const validateCpf = require("../../util/validateCpf");
+
 
 /** @param {express.Request} req * @param {express.Response} res */
 module.exports = async (req, res) => {
-  const { name, email, cpf, password } = req.body;
+  const { name, email, mobile, password } = req.body;
   try {
     const user = await UserModel.findOne({ where: { email } });
 
     if (user) return res.status(400).json({ message: "email already in use" });
-    if (validateCpf(cpf) == false)
-      return res.status(400).json({ message: "invalid cpf" });
 
-    const newUser = await UserModel.create({ name, email, cpf, password });
+    const newUser = await UserModel.create({ name, email, mobile, password });
 
     newUser.password = undefined;
 

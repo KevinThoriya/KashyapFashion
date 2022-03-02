@@ -63,10 +63,7 @@ const ListActions = (props) => {
 }
 
 const userFilters = [
-  // <SearchInput source="q" alwaysOn />,
-    <SearchInput source="name" alwaysOn />,
-//   <TextInput label="Search FirstName" source="name" />,
-  <TextInput label="Search Email" source="email" alwaysOn autoComplete />,
+  <SearchInput source="name" alwaysOn />,
 ]
 
 const UserList = (props) => {
