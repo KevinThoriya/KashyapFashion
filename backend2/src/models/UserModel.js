@@ -8,7 +8,6 @@ class UserModel extends Model {
     static init(connection) {
 
         super.init({
-
             name: DataTypes.STRING,
             email: DataTypes.STRING,
             cpf: DataTypes.STRING,

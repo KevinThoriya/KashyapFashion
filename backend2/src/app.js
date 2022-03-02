@@ -16,6 +16,13 @@ const path = require("path");
 const { errors } = require("celebrate");
 const http = require("http");
 
+const EXpressCurdRoute =  require('express-crud-router');
+const ExpressCrudRouteSequelizeConnector = require('express-crud-router-sequelize-v6-connector');
+const UserModel = require('./models/UserModel');
+const { crud } = EXpressCurdRoute;
+const sequelizeCrud = ExpressCrudRouteSequelizeConnector.default;
+
+
 require("./database/sequelize/connection");
 
 const pagarMeperiodicCheck = require("./services/pagarMe/periodicCheck");
@@ -35,6 +42,8 @@ socketConnection(server);
 app.use(routes);
 
 app.use(errors());
+
+app.use(crud('/kashyap/users', sequelizeCrud(UserModel)))
 
 pagarMeperiodicCheck();
 
