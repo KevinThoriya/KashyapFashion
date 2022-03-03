@@ -19,6 +19,7 @@
     "next": "12.0.7",
     "notistack": "^2.0.3",
     "ra-data-simple-rest": "^3.19.10",
+    "ra-input-rich-text": "^3.19.10",
     "react": "17.0.2",
     "react-admin": "^3.19.10",
     "react-dom": "17.0.2",
