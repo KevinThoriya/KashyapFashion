@@ -6,6 +6,7 @@ import Paper from "@mui/material/Paper";
 import * as Yup from "yup";
 
 import {
+  Alert,
   Checkbox,
   CssBaseline,
   FormControlLabel,
@@ -18,6 +19,7 @@ import axios from "axios";
 import Routes from "./Routes";
 import { useSnackbar } from "notistack";
 import useUser from "../Hooks/useUser";
+import { useState } from "react";
 
 const SignUpValidationSchema = Yup.object().shape({
   email: Yup.string().email().required("Required"),
@@ -35,6 +37,8 @@ const SignUpValidationSchema = Yup.object().shape({
 const SignUp = ({ onSignIn, closeModal }) => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { setUserState } = useUser();
+  const [errorSignUp, setErrorSignUp] = useState('');
+  
   const onSuccess = (res) => { 
     setUserState(res);
     enqueueSnackbar(`Successfully signed up as ${res.user.name}`, {variant: 'success'});
@@ -43,6 +47,7 @@ const SignUp = ({ onSignIn, closeModal }) => {
 
   const onError = (data) => { 
     enqueueSnackbar(data.message, { variant: 'error' });
+    setErrorSignUp(data.message);
     console.log("error payload",data.payload);
   }
 
@@ -57,6 +62,7 @@ const SignUp = ({ onSignIn, closeModal }) => {
     validationSchema: SignUpValidationSchema,
     enableReinitialize: true,
     onSubmit: async (values) => {
+      setErrorSignUp('');
       axios.post(Routes.SignUp, {
         name: values.name,
         email: values.email,
@@ -154,6 +160,11 @@ const SignUp = ({ onSignIn, closeModal }) => {
                 control={<Checkbox value="remember" color="primary" />}
                 label="i accept terms and conditions!"
               />
+              {!!errorSignUp && 
+                <Alert variant="filled" severity="error" className='mt-2'>
+                {errorSignUp}
+              </Alert>
+               }
               <Button
                 type="submit"
                 fullWidth

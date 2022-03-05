@@ -10,12 +10,12 @@ module.exports = async (req, res) => {
     const user = await UserModel.findOne({ where: { email } });
 
     if (!user)
-      return res.status(400).send({ message: "user or password is incorrect" });
+      return res.status(400).send({ message: "Credentials are Incorrect !" });
 
     const comparePassword = await user.checkPassword(password);
 
     if (!comparePassword)
-      return res.status(400).json({ message: "user or password is incorrect" });
+      return res.status(400).json({ message: "Credentials are Incorrect !" });
 
     user.password = undefined;
 

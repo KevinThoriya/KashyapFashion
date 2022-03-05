@@ -1,6 +1,6 @@
 const routes = {
   SignUp: "customer",
-  SignIn: "customer/login",
+  SignIn: "customer/session",
 };
 
 export default routes;

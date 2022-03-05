@@ -51,6 +51,9 @@ const cache = apicache.middleware("1 minute", null, {
 // register customer
 router.post("/customer", userValidator.store, userController.store);
 
+// login Customer and return jwt key
+router.post("/customer/session", sessionValidator.store, sessionController.store);
+
 // router.get(
 //   "/users",
 //   userValidator.list,
@@ -169,8 +172,6 @@ router.post("/customer", userValidator.store, userController.store);
 //   userResetPasswordController.update
 // );
 
-// // RETORNA UMA CHAVE JWT
-// router.post("/sessions", sessionValidator.store, sessionController.store);
 
 // // BUSCA, ADICIONA, ALTERA OU REMOVE UM PRODUTO
 // router.get("/products", productValidator.list, cache, productController.list);
