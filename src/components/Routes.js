@@ -1,5 +1,5 @@
 const routes = {
-  SignUp: "customer/signup",
+  SignUp: "customer",
   SignIn: "customer/login",
 };
 

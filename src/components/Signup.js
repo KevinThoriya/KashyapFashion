@@ -21,12 +21,11 @@ import useUser from "../Hooks/useUser";
 
 const SignUpValidationSchema = Yup.object().shape({
   email: Yup.string().email().required("Required"),
-  firstName: Yup.string().required("Required"),
-  lastName: Yup.string().required("Required"),
+  name: Yup.string().required("Required"),
   mobile: Yup.number().required("Required"),
   password: Yup.string()
     .required("Password is required")
-    .min(4, "minimum 4 letter required."),
+    .min(3, "minimum 4 letter required."),
   ConfirmPassword: Yup.string().oneOf(
     [Yup.ref("password"), null],
     "Passwords must match"
@@ -37,10 +36,8 @@ const SignUp = ({ onSignIn, closeModal }) => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { setUserState } = useUser();
   const onSuccess = (res) => { 
-    let userData = res.payload;
-    enqueueSnackbar(res.message, {variant: 'success'});
-    console.log(userData);
-    setUserState(userData);
+    setUserState(res);
+    enqueueSnackbar(`Successfully signed up as ${res.user.name}`, {variant: 'success'});
     closeModal();
   }
 
@@ -49,12 +46,10 @@ const SignUp = ({ onSignIn, closeModal }) => {
     console.log("error payload",data.payload);
   }
 
-
   const formik = useFormik({
     initialValues: {
       email: "",
-      firstName: "",
-      lastName: "",
+      name: "",
       mobile: "",
       password: "",
       ConfirmPassword: "",
@@ -62,15 +57,16 @@ const SignUp = ({ onSignIn, closeModal }) => {
     validationSchema: SignUpValidationSchema,
     enableReinitialize: true,
     onSubmit: async (values) => {
-      const res = await axios.post(Routes.SignUp, {
-        firstname: values.firstName,
-        lastname: values.lastName,
+      axios.post(Routes.SignUp, {
+        name: values.name,
         email: values.email,
-        password_hash: values.password,
+        password: values.password,
         mobile: values.mobile,
+      }).then((res) => { 
+        return onSuccess(res.data);
+      }).catch(error => { 
+        return onError(error.response?.data);
       });
-      if (res.data.status == 200) return onSuccess(res.data);
-      else if (res.data.status == 400) return onError(res.data);
     },
   });
 
@@ -128,16 +124,10 @@ const SignUp = ({ onSignIn, closeModal }) => {
                 error={touched.email && errors.email}
               />
               <TextInput
-                placeholder="First Name"
-                name="firstName"
-                {...getFieldProps("firstName")}
-                error={touched.firstName && errors.firstName}
-              />
-              <TextInput
-                placeholder="Last Name"
-                name="lastName"
-                {...getFieldProps("lastName")}
-                error={touched.lastName && errors.lastName}
+                placeholder="Name"
+                name="name"
+                {...getFieldProps("name")}
+                error={touched.name && errors.name}
               />
               <TextInput
                 type="number"

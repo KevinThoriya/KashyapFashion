@@ -47,7 +47,10 @@ const cache = apicache.middleware("1 minute", null, {
   },
 });
 
-// BUSCA, ADICIONA, ALTERA OU REMOVE USUÁRIOS
+// ======= customers routes
+// register customer
+router.post("/customer", userValidator.store, userController.store);
+
 // router.get(
 //   "/users",
 //   userValidator.list,
@@ -60,7 +63,6 @@ const cache = apicache.middleware("1 minute", null, {
 //   jwtAuthentication,
 //   userController.show
 // );
-// router.post("/users", userValidator.store, userController.store);
 // router.put(
 //   "/users",
 //   userValidator.update,

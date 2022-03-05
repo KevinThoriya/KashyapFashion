@@ -25,7 +25,7 @@ const Navbar = () => {
   const toggleLogin = () => setLoginDialog(!loginDialog);
   const toggleSearch = () => setSearchDialog(!searchDialog);
   const { user } = useUser();
-  console.log("user",user)
+
   return (
     <>
       <AppBar

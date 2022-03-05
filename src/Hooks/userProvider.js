@@ -48,7 +48,7 @@ export const UserContextProvider = ({ children }) => {
   return (
     <UserContext.Provider
       value={{
-        user:UserState,
+        ...UserState,
         setUserState: (state) => {
           setUserState({ ...UserState, ...state });
         },

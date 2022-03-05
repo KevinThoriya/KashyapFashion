@@ -17,14 +17,14 @@ const sendEmailJob = require("./jobs/sendEmailJob");
 
 const sendEmailQueue = new Bull("SendEmailQueue", process.env.REDIS_URL, {
   limiter: {
-    // envia no maximo 8 emails por minuto
+    // send no more than 8 emails per minute
     max: 8,
     duration: 60000,
   },
   defaultJobOptions: {
     priority: 2,
     removeOnComplete: true,
-    // tenta reenviar 3 vezes com um minuto de diferença e falha se demorar mais de 10 segundos
+    // tries to resend 3 times one minute apart and fails if it takes longer than 10 seconds
     attempts: 3,
     backoff: {
       type: "fixed",

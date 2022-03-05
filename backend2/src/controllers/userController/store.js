@@ -6,6 +6,17 @@ const userRegisterTemplate = require("../../services/mailer/templates/userRegist
 
 
 /** @param {express.Request} req * @param {express.Response} res */
+
+const AsyncSendMail = async (email,template) => { 
+  sendEmailQueue.add({
+    from: "kashyapfashion@gmail.com",
+    to: email,
+    subject: "Kashyap Fashion",
+    template,
+  });
+}
+
+
 module.exports = async (req, res) => {
   const { name, email, mobile, password } = req.body;
   try {
@@ -19,12 +30,7 @@ module.exports = async (req, res) => {
 
     const template = userRegisterTemplate(newUser.name);
 
-    await sendEmailQueue.add({
-      from: "donotreply@companydomain.com",
-      to: newUser.email,
-      subject: "E-Commerce - Confirmação de criação de conta",
-      template,
-    });
+    AsyncSendMail(newUser.email, template);
 
     return res.json({ user: newUser, token: newUser.generateToken() });
   } catch (error) {
@@ -32,3 +38,5 @@ module.exports = async (req, res) => {
     return res.status(500).json({ message: "internal error" });
   }
 };
+
+
