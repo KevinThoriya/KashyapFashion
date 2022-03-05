@@ -54,18 +54,20 @@ router.post("/customer", userValidator.store, userController.store);
 // login Customer and return jwt key
 router.post("/customer/session", sessionValidator.store, sessionController.store);
 
+// get info of user 
+router.get(
+  "/users/:id",
+  userValidator.show,
+  jwtAuthentication,
+  userController.show
+);
 // router.get(
 //   "/users",
 //   userValidator.list,
 //   adminJwtAuthentication,
 //   userController.list
 // );
-// router.get(
-//   "/users/:id",
-//   userValidator.show,
-//   jwtAuthentication,
-//   userController.show
-// );
+
 // router.put(
 //   "/users",
 //   userValidator.update,

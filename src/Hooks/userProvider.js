@@ -3,80 +3,59 @@ import * as React from "react";
 import { useState } from "react";
 import { Button } from '@material-ui/core';
 import InputModal from "../components/InputModal";
-
+import axiosApi from '../axiosApi';
+import jwt from 'jsonwebtoken';
 
 export const UserContext = React.createContext(null);
 
 
 export const UserContextProvider = ({ children }) => {
   const [UserState, setUserState] = useState({});
+  const [getToken, setToken] = useState('');
+  
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    if(token) setToken(token);
+  }, []);
 
-  // const [loadingState, setLoadingState] = useState(false);
-  // let defaultModalState = { msg: '', visible: false, onConfirm: undefined, onCancel : undefined }
-  // const [conformationModal, setConformationModal] = useState(defaultModalState);
+  React.useEffect( () => {
+    if(getToken.length > 0){
+        localStorage.setItem('token', getToken);
+        axiosApi.defaults.headers.authorization = "Bearer " + getToken;   
+        if(!UserState?.user) fetchUser();
+    }
+  }, [getToken]);
 
-  // const blockUi = () => setLoadingState(false);
-  // const unBlockUi = () => setLoadingState(false);
-  // const openConfirmation = (msg, onConfirm, onCancel=null) => setConformationModal({ msg, visible: true, onConfirm, onCancel })
-  // const closeConformation = () => setConformationModal(defaultModalState);
-
-
-  // const confrimationFooter = <div className="modal-footer clear">
-  //   <span className="mx-2">
-  //     <Button
-  //       color="primary"
-  //       variant="contained"
-  //       onClick={() => {
-  //         conformationModal.onConfirm();
-  //         closeConformation();
-  //       }}
-  //     >
-  //       Confirm
-  //     </Button>
-  //   </span>
-  //   <Button
-  //     color="secondary"
-  //     variant="contained"
-  //     onClick={() => {
-  //       conformationModal.onCancel && conformationModal.onCancel();
-  //       closeConformation();
-  //     }}
-  //   >
-  //     Cancel
-  //   </Button>
-  // </div>;
+  async function fetchUser(){
+    try {
+        
+        const tokenPayload = jwt.decode(getToken);
+        const response = await axiosApi.get('/users/' + tokenPayload.id);
+      setUserState({
+        user: response.data,
+        token: getToken,
+      });
+    } catch (error) {
+        console.log(error);
+        axiosApi.defaults.headers.authorization = undefined;
+        localStorage.removeItem('token');
+        setUserState({});
+    }
+}
+  
   return (
     <UserContext.Provider
       value={{
         ...UserState,
         setUserState: (state) => {
+          if (state?.token) setToken(state?.token);
           setUserState({ ...UserState, ...state });
         },
-        // blockUi,
-        // unBlockUi,
-        // openConfirmation,
+        
       }}
     >
       {children}
-      {/* {loadingState && (
-        <div className="absolute left-0 right-0 w-screen h-screen loading-background flex items-center justify-center ">
-          <CircularProgress size={100} />
-        </div>
-      )}
-
-      <InputModal
-        fullSize={false}
-        title="CONFIRMATION"
-        visible={conformationModal.visible}
-        closeButton={false}
-        closeEditor={() => { setConformationModal(defaultModalState) }}
-        onSubmit={conformationModal.onConfirm}
-        footer={confrimationFooter}
-      >
-        <p className="text-3xl font-bold m-4">
-          {conformationModal.msg}
-        </p>
-      </InputModal> */}
+      
     </UserContext.Provider>
   );
 };

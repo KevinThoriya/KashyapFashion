@@ -44,7 +44,6 @@ class UserModel extends Model {
     }
 
     checkPassword(password) {
-
         return bcrypt.compare(password, this.password);
     }
 

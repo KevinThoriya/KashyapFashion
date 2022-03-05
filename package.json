@@ -16,6 +16,7 @@
     "@prisma/client": "^3.9.2",
     "axios": "^0.26.0",
     "formik": "^2.2.9",
+    "jsonwebtoken": "^8.5.1",
     "next": "12.0.7",
     "notistack": "^2.0.3",
     "ra-data-simple-rest": "^3.19.10",
