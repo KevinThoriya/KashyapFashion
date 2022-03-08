@@ -17,6 +17,15 @@ import {
 import { LoginSignup } from "../components/LoginSignupModal";
 import authProvider from "./authProvider";
 import { useLogin, useNotify, Notification, defaultTheme } from "react-admin";
+import {
+  BadgeRounded,
+  Camera,
+  Face,
+  HandymanOutlined,
+  Home,
+  Storefront,
+  TocRounded,
+} from "@mui/icons-material";
 
 const Login = (props) => {
   const login = useLogin();
@@ -47,30 +56,35 @@ const App = () => {
             list={UserList}
             create={UserCreate}
             edit={UserEdit}
+            icon={Face}
           />
           <Resource
             name="categories"
             list={CategoryList}
             create={CategoryCreate}
             edit={CategoryEdit}
+            icon={TocRounded}
           />
           <Resource
             name="address"
             list={AddressList}
             create={AddressCreate}
             edit={AddressEdit}
+            icon={Home}
           />
           <Resource
             name="products"
             list={ProductList}
             create={ProductCreate}
             edit={ProductEdit}
+            icon={Storefront}
           />
           <Resource
             name="photos"
             list={UploadImageList}
             create={UploadImageCreate}
             edit={UploadImageEdit}
+            icon={Camera}
           />
         </Admin>
       </div>
