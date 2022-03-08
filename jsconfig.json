@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["/src/components/*"],
+      "@adminComponent/*": ["/src/AdminComponent/*"],
+      "@hook/*": ["/src/Hooks/*"],
+      "@root/*": ["./*"]
+    }
+  }
+}

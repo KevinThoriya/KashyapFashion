@@ -31,6 +31,7 @@ const routes = require("./routes");
 const CategoryModel = require("./models/CategoryModel");
 const AddressModel = require("./models/AddressModel");
 const ProductModel = require("./models/ProductModel");
+const ImageModel = require("./models/ImageModel");
 
 const app = express();
 const server = http.createServer(app);
@@ -50,6 +51,7 @@ app.use(crud('/kashyap/users', sequelizeCrud(UserModel)))
 app.use(crud('/kashyap/categories', sequelizeCrud(CategoryModel)))
 app.use(crud('/kashyap/address', sequelizeCrud(AddressModel)))
 app.use(crud('/kashyap/products', sequelizeCrud(ProductModel)))
+app.use(crud('/kashyap/photos', sequelizeCrud(ImageModel)))
 
 pagarMeperiodicCheck();
 

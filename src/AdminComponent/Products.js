@@ -20,9 +20,19 @@ import {
   SelectInput,
   BooleanInput,
   Tab,
+  ImageInput,
+  ImageField,
+  ArrayInput,
+  SimpleFormIterator,
+  ReferenceArrayInput,
+  AutocompleteInput,
+  ReferenceManyField,
 } from "react-admin";
+import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import RichTextInput from "ra-input-rich-text";
+import { CameraAltOutlined } from "@mui/icons-material";
 export const styles = {
   twoCol: { width: "100%" },
 };
@@ -125,6 +135,10 @@ export const ProductCreate = (props) => {
         <Tab label="Info about product" className="border bg-slate-400">
           <RichTextInput source="html_body" label="product info" />
         </Tab>
+
+        <ImageInput multiple source="images" accept="image/*">
+          <ImageField source="url" title="title" />
+        </ImageInput>
       </SimpleForm>
     </Create>
   );
@@ -156,7 +170,7 @@ export const ProductEdit = (props) => {
             reference="categories"
             fullWidth
           >
-            <SelectInput optionText="name" />
+            <AutocompleteInput optionText="name" />
           </ReferenceInput>
           <TextInput
             source="weight"
@@ -183,7 +197,44 @@ export const ProductEdit = (props) => {
             validate={required()}
           />
         </div>
-        <RichTextInput source="html_body" />
+
+        <Tab label="Info about product" className="border bg-slate-400">
+          <RichTextInput source="html_body" label="product info" />
+        </Tab>
+
+        <ReferenceManyField
+          reference="photos"
+          target="product_id"
+          label="Product Images"
+          basePath="photos"
+        >
+          <Datagrid>
+            <ImageField source="url" label="image" />
+            <TextField source="filename" />
+            <EditButton />
+            <DeleteButton />
+          </Datagrid>
+        </ReferenceManyField>
+
+        <Button
+          variant="text"
+          component={Link}
+          to={{
+            pathname: "/photos/create",
+            state: { defaultProductId: props.id },
+          }}
+          label="Add Image"
+        >
+          <CameraAltOutlined />
+        </Button>
+        {/* <ReferenceArrayInput source="images" resource="photos">
+          <SimpleFormIterator>
+              <TextField source="filename" /> */}
+        {/* <ImageInput  source="url" accept="image/*"> */}
+        {/* <ImageField source="url" title="title" /> */}
+        {/* </ImageInput> */}
+        {/* </SimpleFormIterator>
+        </ReferenceArrayInput> */}
       </SimpleForm>
     </Edit>
   );

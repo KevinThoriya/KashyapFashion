@@ -37,19 +37,21 @@ const SignUpValidationSchema = Yup.object().shape({
 const SignUp = ({ onSignIn, closeModal }) => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { setUserState } = useUser();
-  const [errorSignUp, setErrorSignUp] = useState('');
-  
-  const onSuccess = (res) => { 
-    setUserState(res);
-    enqueueSnackbar(`Successfully signed up as ${res.user.name}`, {variant: 'success'});
-    closeModal();
-  }
+  const [errorSignUp, setErrorSignUp] = useState("");
 
-  const onError = (data) => { 
-    enqueueSnackbar(data.message, { variant: 'error' });
+  const onSuccess = (res) => {
+    setUserState(res);
+    enqueueSnackbar(`Successfully signed up as ${res.user.name}`, {
+      variant: "success",
+    });
+    closeModal && closeModal();
+  };
+
+  const onError = (data) => {
+    enqueueSnackbar(data.message, { variant: "error" });
     setErrorSignUp(data.message);
-    console.log("error payload",data.payload);
-  }
+    console.log("error payload", data.payload);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -62,17 +64,20 @@ const SignUp = ({ onSignIn, closeModal }) => {
     validationSchema: SignUpValidationSchema,
     enableReinitialize: true,
     onSubmit: async (values) => {
-      setErrorSignUp('');
-      axios.post(Routes.SignUp, {
-        name: values.name,
-        email: values.email,
-        password: values.password,
-        mobile: values.mobile,
-      }).then((res) => { 
-        return onSuccess(res.data);
-      }).catch(error => { 
-        return onError(error.response?.data);
-      });
+      setErrorSignUp("");
+      axios
+        .post(Routes.SignUp, {
+          name: values.name,
+          email: values.email,
+          password: values.password,
+          mobile: values.mobile,
+        })
+        .then((res) => {
+          return onSuccess(res.data);
+        })
+        .catch((error) => {
+          return onError(error.response?.data);
+        });
     },
   });
 
@@ -160,11 +165,11 @@ const SignUp = ({ onSignIn, closeModal }) => {
                 control={<Checkbox value="remember" color="primary" />}
                 label="i accept terms and conditions!"
               />
-              {!!errorSignUp && 
-                <Alert variant="filled" severity="error" className='mt-2'>
-                {errorSignUp}
-              </Alert>
-               }
+              {!!errorSignUp && (
+                <Alert variant="filled" severity="error" className="mt-2">
+                  {errorSignUp}
+                </Alert>
+              )}
               <Button
                 type="submit"
                 fullWidth
