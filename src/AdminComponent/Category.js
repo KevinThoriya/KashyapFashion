@@ -1,4 +1,5 @@
 import React from "react";
+import { TextInput } from "./Fields";
 import {
   useListContext,
   TopToolbar,
@@ -9,7 +10,6 @@ import {
   sanitizeListRestProps,
   Datagrid,
   Create,
-  TextInput,
   SimpleForm,
   Edit,
   List,

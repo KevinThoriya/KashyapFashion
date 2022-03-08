@@ -1,4 +1,5 @@
-import React from 'react'
+import React from "react";
+import { TextInput } from "./Fields";
 import {
   useListContext,
   TopToolbar,
@@ -9,7 +10,6 @@ import {
   sanitizeListRestProps,
   Datagrid,
   Create,
-  TextInput,
   SimpleForm,
   Edit,
   List,
@@ -22,29 +22,29 @@ import {
   SearchInput,
   ReferenceInput,
   SelectInput,
-} from 'react-admin'
-import IconEvent from '@material-ui/icons/Event'
-import { makeStyles, Theme } from '@material-ui/core/styles'
-import { Styles } from '@material-ui/styles/withStyles'
+} from "react-admin";
+import IconEvent from "@material-ui/icons/Event";
+import { makeStyles, Theme } from "@material-ui/core/styles";
+import { Styles } from "@material-ui/styles/withStyles";
 
 export const styles = {
-  twoCol: { width: '100%' },
-}
-const useStyles = makeStyles(styles)
+  twoCol: { width: "100%" },
+};
+const useStyles = makeStyles(styles);
 
 const ListActions = (props) => {
-  const { className, maxResults, ...rest } = props
-  const { total } = useListContext()
+  const { className, maxResults, ...rest } = props;
+  const { total } = useListContext();
 
   return (
     <TopToolbar className={className} {...sanitizeListRestProps(rest)}>
       <CreateButton />
       <ExportButton disabled={total === 0} maxResults={maxResults} />
     </TopToolbar>
-  )
-}
+  );
+};
 
-const AddressFilters = [<SearchInput source="name" alwaysOn />]
+const AddressFilters = [<SearchInput source="name" key={"name"} alwaysOn />];
 
 export const AddressList = (props) => {
   return (
@@ -63,11 +63,11 @@ export const AddressList = (props) => {
         <DeleteButton />
       </Datagrid>
     </List>
-  )
-}
+  );
+};
 
 export const AddressCreate = (props) => {
-  const classes = useStyles(props)
+  const classes = useStyles(props);
 
   return (
     <Create {...props}>
@@ -90,8 +90,8 @@ export const AddressCreate = (props) => {
         </div>
       </SimpleForm>
     </Create>
-  )
-}
+  );
+};
 
 export const AddressEdit = (props) => {
   return (
@@ -110,5 +110,5 @@ export const AddressEdit = (props) => {
         </div>
       </SimpleForm>
     </Edit>
-  )
-}
+  );
+};

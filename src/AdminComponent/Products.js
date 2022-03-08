@@ -6,7 +6,6 @@ import {
   sanitizeListRestProps,
   Datagrid,
   Create,
-  TextInput,
   SimpleForm,
   Edit,
   List,
@@ -29,6 +28,7 @@ import {
   ReferenceManyField,
   Button,
 } from "react-admin";
+import { TextInput } from "./Fields";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import RichTextInput from "ra-input-rich-text";
@@ -165,7 +165,7 @@ export const ProductCreate = (props) => {
 export const ProductEdit = (props) => {
   return (
     <Edit {...props}>
-      <SimpleForm>
+      <SimpleForm variant="standard">
         <div className="min-w-full min-h-full grid grid-cols-2 gap-y-2 gap-x-5">
           <TextInput source="title" fullWidth validate={required()} />
           <TextInput source="description" fullWidth validate={required()} />
@@ -174,6 +174,7 @@ export const ProductEdit = (props) => {
             type="number"
             fullWidth
             validate={required()}
+            variant="outlined"
           />
           <TextInput
             source="quantity_stock"
