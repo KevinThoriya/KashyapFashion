@@ -27,8 +27,8 @@ import {
   ReferenceArrayInput,
   AutocompleteInput,
   ReferenceManyField,
+  Button,
 } from "react-admin";
-import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import RichTextInput from "ra-input-rich-text";
@@ -221,7 +221,7 @@ export const ProductEdit = (props) => {
           component={Link}
           to={{
             pathname: "/photos/create",
-            state: { defaultProductId: props.id },
+            search: props.id,
           }}
           label="Add Image"
         >
