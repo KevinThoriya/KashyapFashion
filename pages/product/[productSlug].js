@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import Head from 'next/head'
-import { useRouter } from 'next/router'
+import Head from "next/head";
+import { useRouter } from "next/router";
 import {
   Button,
   Divider,
@@ -11,55 +11,55 @@ import {
   Tabs,
   TextareaAutosize,
   Typography,
-} from '@mui/material'
-import Navbar from '../../src/components/Navbar'
-import SBreadcrumb from '../../src/components/SBreadcrumb'
-import ReactThemeProvider from '../../src/components/ThemeProvider'
-import Footer from '../../src/components/Footer'
-import { useEffect, useState } from 'react'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import ShareIcon from '@mui/icons-material/Share'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import { TextField } from '@mui/material'
-import { FactCheckRounded } from '@mui/icons-material'
-import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff'
-import LocalOfferIcon from '@mui/icons-material/LocalOffer'
-import GppGoodIcon from '@mui/icons-material/GppGood'
-import EditOffIcon from '@mui/icons-material/EditOff'
-import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining'
-import { Box } from '@mui/system'
-import Trending from '../../src/components/Trending'
-import SlideFourProduct from '../../src/components/SlideFourProduct'
-import useSWR from 'swr'
-import fetcher from '../../src/components/fetcher'
-import { Providers } from '..'
+} from "@mui/material";
+import Navbar from "../../src/components/Navbar";
+import SBreadcrumb from "../../src/components/SBreadcrumb";
+import ReactThemeProvider from "../../src/components/ThemeProvider";
+import Footer from "../../src/components/Footer";
+import { useEffect, useState } from "react";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ShareIcon from "@mui/icons-material/Share";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { TextField } from "@mui/material";
+import { FactCheckRounded } from "@mui/icons-material";
+import FlightTakeoffIcon from "@mui/icons-material/FlightTakeoff";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import GppGoodIcon from "@mui/icons-material/GppGood";
+import EditOffIcon from "@mui/icons-material/EditOff";
+import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
+import { Box } from "@mui/system";
+import Trending from "../../src/components/Trending";
+import SlideFourProduct from "../../src/components/SlideFourProduct";
+import useSWR from "swr";
+import fetcher from "../../src/components/fetcher";
+import { Providers } from "..";
 
 function Info(props) {
-  const { title, data = {} } = props
+  const { title, data = {} } = props;
 
   return (
     <div>
       <Typography variant="h6" className="my-1">
         {title}
       </Typography>
-      <div class="">
+      <div className="">
         {Object.keys(data).map((key) => (
           <div key={key} className="flex">
             <Typography variant="body1" className="my-1 w-60">
               {key}
             </Typography>
             <Typography variant="body2" className="my-1">
-              : {'  '} {data[key]}
+              : {"  "} {data[key]}
             </Typography>
           </div>
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props
+  const { children, value, index, ...other } = props;
 
   return (
     <div
@@ -75,7 +75,7 @@ function TabPanel(props) {
         </Box>
       )}
     </div>
-  )
+  );
 }
 
 function SideProductPhoto({ photo, selectedPhoto, setSelectedPhoto }) {
@@ -87,51 +87,51 @@ function SideProductPhoto({ photo, selectedPhoto, setSelectedPhoto }) {
       <img
         src={photo.src}
         alt={photo.name}
-        className={`w-full ${selectedPhoto?.id != photo?.id && 'opacity-50'} `}
+        className={`w-full ${selectedPhoto?.id != photo?.id && "opacity-50"} `}
       />
     </div>
-  )
+  );
 }
 
 export default function Category() {
-  const router = useRouter()
-  const { productSlug } = router.query
+  const router = useRouter();
+  const { productSlug } = router.query;
   const { data: productDetail, error } = useSWR(
     `/api/product/${productSlug}`,
-    fetcher,
-  )
+    fetcher
+  );
   const breadcrumb = [
     {
-      name: 'Home',
-      href: '/',
+      name: "Home",
+      href: "/",
     },
     {
-      name: 'Salwar Kameez',
-      href: '/salwar-kameez',
+      name: "Salwar Kameez",
+      href: "/salwar-kameez",
     },
 
     {
       name: productSlug,
       href: `/sarees/${productSlug}`,
     },
-  ]
+  ];
   let similarProduct = {
-    title: 'Similar Products',
+    title: "Similar Products",
     data: productDetail?.similar || [],
-  }
+  };
 
   const [selectedPhoto, setSelectedPhoto] = useState(
-    productDetail && productDetail?.photos[0],
-  )
+    productDetail && productDetail?.photos[0]
+  );
   useEffect(() => {
-    if (productDetail?.photos) setSelectedPhoto(productDetail?.photos[0])
-  }, [productDetail])
-  const [tabValue, handleTabChange] = useState(0)
+    if (productDetail?.photos) setSelectedPhoto(productDetail?.photos[0]);
+  }, [productDetail]);
+  const [tabValue, handleTabChange] = useState(0);
   return (
     <>
       <div className={{}}>
         <Head>
-          <title>CheckOut</title>
+          <title>product name</title>
           <meta name="description" content="Generated by create next app" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
@@ -163,7 +163,7 @@ export default function Category() {
                   <Typography
                     variant="h6"
                     className=""
-                    style={{ fontWeight: '400' }}
+                    style={{ fontWeight: "400" }}
                   >
                     {productDetail?.name}
                   </Typography>
@@ -173,7 +173,7 @@ export default function Category() {
                     <Typography
                       fontSize="900"
                       variant="h5"
-                      style={{ fontWeight: 'bold' }}
+                      style={{ fontWeight: "bold" }}
                     >{`${productDetail?.currency} ${productDetail?.price}`}</Typography>
                   </div>
                   {productDetail?.inStock && (
@@ -182,7 +182,7 @@ export default function Category() {
                         fontSize="900"
                         variant="body2"
                         className="pr-20"
-                        style={{ fontWeight: 'bold' }}
+                        style={{ fontWeight: "bold" }}
                       >
                         Ready To Ship
                       </Typography>
@@ -226,7 +226,6 @@ export default function Category() {
                     <Button
                       variant="contained"
                       color="primary"
-                      className="mt-4"
                       className="bg-primary text-white mt-4 px-8"
                     >
                       check
@@ -325,7 +324,7 @@ export default function Category() {
             </div>
             {/* product info */}
             <div className="border border-primary mt-4">
-              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                 <Tabs
                   value={tabValue}
                   onChange={(e, value) => handleTabChange(value)} //handleTabChange
@@ -369,5 +368,5 @@ export default function Category() {
       </div>
       <Footer />
     </>
-  )
+  );
 }

@@ -32,6 +32,7 @@ let authProvider = {
   checkAuth: () => {
     const token = localStorage.getItem("token");
     const tokenPayload = jwt.decode(token);
+    if (!tokenPayload?.id) return Promise.reject();
     return axiosApi.get("/users/" + tokenPayload.id).then((res) => {
       localStorage.setItem("username", res.data.name);
     });
@@ -41,6 +42,7 @@ let authProvider = {
   getIdentity: () => {
     const token = localStorage.getItem("token");
     const tokenPayload = jwt.decode(token);
+    if (!tokenPayload?.id) return Promise.reject();
     return axiosApi.get("/users/" + tokenPayload.id).then((res) => {
       return {
         avatar: null,
