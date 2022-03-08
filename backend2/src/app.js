@@ -16,12 +16,11 @@ const path = require("path");
 const { errors } = require("celebrate");
 const http = require("http");
 
-const EXpressCurdRoute =  require('express-crud-router');
-const ExpressCrudRouteSequelizeConnector = require('express-crud-router-sequelize-v6-connector');
-const UserModel = require('./models/UserModel');
+const EXpressCurdRoute = require("express-crud-router");
+const ExpressCrudRouteSequelizeConnector = require("express-crud-router-sequelize-v6-connector");
+const UserModel = require("./models/UserModel");
 const { crud } = EXpressCurdRoute;
 const sequelizeCrud = ExpressCrudRouteSequelizeConnector.default;
-
 
 require("./database/sequelize/connection");
 
@@ -32,6 +31,7 @@ const CategoryModel = require("./models/CategoryModel");
 const AddressModel = require("./models/AddressModel");
 const ProductModel = require("./models/ProductModel");
 const ImageModel = require("./models/ImageModel");
+const { Op } = require("sequelize");
 
 const app = express();
 const server = http.createServer(app);
@@ -47,11 +47,35 @@ app.use(routes);
 
 app.use(errors());
 
-app.use(crud('/kashyap/users', sequelizeCrud(UserModel)))
-app.use(crud('/kashyap/categories', sequelizeCrud(CategoryModel)))
-app.use(crud('/kashyap/address', sequelizeCrud(AddressModel)))
-app.use(crud('/kashyap/products', sequelizeCrud(ProductModel)))
-app.use(crud('/kashyap/photos', sequelizeCrud(ImageModel)))
+let filters = {
+  email: (value) => ({
+    [Op.iLike]: "%" + value + "%",
+  }),
+  name: (value) => {
+    return {
+      [Op.iLike]: "%" + value + "%",
+    };
+  },
+  title: (value) => {
+    return {
+      [Op.iLike]: "%" + value + "%",
+    };
+  },
+  html_body: (value) => {
+    return {
+      [Op.iLike]: "%" + value + "%",
+    };
+  },
+};
+app.use(
+  crud("/kashyap/users", sequelizeCrud(UserModel), {
+    filters,
+  })
+);
+app.use(crud("/kashyap/categories", sequelizeCrud(CategoryModel), { filters }));
+app.use(crud("/kashyap/address", sequelizeCrud(AddressModel), { filters }));
+app.use(crud("/kashyap/products", sequelizeCrud(ProductModel), { filters }));
+app.use(crud("/kashyap/photos", sequelizeCrud(ImageModel), { filters }));
 
 pagarMeperiodicCheck();
 

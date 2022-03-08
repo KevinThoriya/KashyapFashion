@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   useListContext,
   TopToolbar,
@@ -20,32 +20,32 @@ import {
   EmailField,
   SearchInput,
   email,
-} from 'react-admin'
-import IconEvent from '@material-ui/icons/Event'
-import { makeStyles, Theme } from '@material-ui/core/styles'
-import { Styles } from '@material-ui/styles/withStyles'
+} from "react-admin";
+import IconEvent from "@material-ui/icons/Event";
+import { makeStyles, Theme } from "@material-ui/core/styles";
+import { Styles } from "@material-ui/styles/withStyles";
 
 export const styles = {
-  first_name: { display: 'inline-block' },
-  last_name: { display: 'inline-block', marginLeft: 32 },
+  first_name: { display: "inline-block" },
+  last_name: { display: "inline-block", marginLeft: 32 },
   email: { width: 544 },
   address: { maxWidth: 544 },
-  zipcode: { display: 'inline-block' },
-  city: { display: 'inline-block', marginLeft: 32 },
+  zipcode: { display: "inline-block" },
+  city: { display: "inline-block", marginLeft: 32 },
   comment: {
-    maxWidth: '20em',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
+    maxWidth: "20em",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
   },
-  password: { display: 'inline-block' },
-  confirm_password: { display: 'inline-block', marginLeft: 32 },
-}
-const useStyles = makeStyles(styles)
+  password: { display: "inline-block" },
+  confirm_password: { display: "inline-block", marginLeft: 32 },
+};
+const useStyles = makeStyles(styles);
 
 const ListActions = (props) => {
-  const { className, maxResults, ...rest } = props
-  const { total } = useListContext()
+  const { className, maxResults, ...rest } = props;
+  const { total } = useListContext();
 
   return (
     <TopToolbar className={className} {...sanitizeListRestProps(rest)}>
@@ -60,12 +60,23 @@ const ListActions = (props) => {
                 <IconEvent />
             </Button> */}
     </TopToolbar>
-  )
-}
+  );
+};
 
 const userFilters = [
-  <SearchInput source="name" alwaysOn />,
-]
+  <SearchInput
+    source="name"
+    key={"name"}
+    InputProps={{ label: "search name", placeholder: "type name..." }}
+    alwaysOn
+  />,
+  <SearchInput
+    source="email"
+    key={"email"}
+    InputProps={{ label: "search email", placeholder: "type email..." }}
+    alwaysOn
+  />,
+];
 
 const UserList = (props) => {
   return (
@@ -78,11 +89,11 @@ const UserList = (props) => {
         <DeleteButton />
       </Datagrid>
     </List>
-  )
-}
+  );
+};
 
 export const UserCreate = (props) => {
-  const classes = useStyles(props)
+  const classes = useStyles(props);
 
   return (
     <Create {...props}>
@@ -103,8 +114,8 @@ export const UserCreate = (props) => {
       <DateInput label="Publication date" source="published_at" defaultValue={new Date()} /> */}
       </SimpleForm>
     </Create>
-  )
-}
+  );
+};
 
 export const UserEdit = (props) => {
   return (
@@ -134,7 +145,7 @@ export const UserEdit = (props) => {
       </ReferenceManyField> */}
       </SimpleForm>
     </Edit>
-  )
-}
+  );
+};
 
-export default UserList
+export default UserList;

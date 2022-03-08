@@ -50,7 +50,25 @@ const ListActions = (props) => {
   );
 };
 
-const ProductFilters = [<SearchInput key="title" source="title" alwaysOn />];
+const ProductFilters = [
+  <SearchInput
+    InputProps={{
+      label: "search Product name",
+      placeholder: "type Product name...",
+    }}
+    key="title"
+    source="title"
+    alwaysOn
+  />,
+  <SearchInput
+    InputProps={{
+      placeholder: "search by keyword...",
+    }}
+    key="html_body"
+    source="html_body"
+    alwaysOn
+  />,
+];
 
 export const ProductList = (props) => {
   return (

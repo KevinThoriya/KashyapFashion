@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   useListContext,
   TopToolbar,
@@ -22,29 +22,36 @@ import {
   SearchInput,
   ReferenceInput,
   SelectInput,
-} from 'react-admin'
-import IconEvent from '@material-ui/icons/Event'
-import { makeStyles, Theme } from '@material-ui/core/styles'
-import { Styles } from '@material-ui/styles/withStyles'
+} from "react-admin";
+import IconEvent from "@material-ui/icons/Event";
+import { makeStyles, Theme } from "@material-ui/core/styles";
+import { Styles } from "@material-ui/styles/withStyles";
 
 export const styles = {
-  name: { display: 'inline-block', marginLeft: 32 },
-}
-const useStyles = makeStyles(styles)
+  name: { display: "inline-block", marginLeft: 32 },
+};
+const useStyles = makeStyles(styles);
 
 const ListActions = (props) => {
-  const { className, maxResults, ...rest } = props
-  const { total } = useListContext()
+  const { className, maxResults, ...rest } = props;
+  const { total } = useListContext();
 
   return (
     <TopToolbar className={className} {...sanitizeListRestProps(rest)}>
       <CreateButton />
       <ExportButton disabled={total === 0} maxResults={maxResults} />
     </TopToolbar>
-  )
-}
+  );
+};
 
-const categoryFilters = [<SearchInput source="name" alwaysOn />]
+const categoryFilters = [
+  <SearchInput
+    key="name"
+    InputProps={{ placeholder: "type name ...." }}
+    source="name"
+    alwaysOn
+  />,
+];
 
 export const CategoryList = (props) => {
   return (
@@ -62,11 +69,11 @@ export const CategoryList = (props) => {
         <DeleteButton />
       </Datagrid>
     </List>
-  )
-}
+  );
+};
 
 export const CategoryCreate = (props) => {
-  const classes = useStyles(props)
+  const classes = useStyles(props);
 
   return (
     <Create {...props}>
@@ -86,8 +93,8 @@ export const CategoryCreate = (props) => {
         </ReferenceInput>
       </SimpleForm>
     </Create>
-  )
-}
+  );
+};
 
 export const CategoryEdit = (props) => {
   return (
@@ -104,5 +111,5 @@ export const CategoryEdit = (props) => {
         </ReferenceInput>
       </SimpleForm>
     </Edit>
-  )
-}
+  );
+};
