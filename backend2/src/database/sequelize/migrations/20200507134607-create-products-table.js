@@ -1,119 +1,117 @@
-'use strict';
-const Sequelize = require('sequelize');
+"use strict";
+const Sequelize = require("sequelize");
 
 module.exports = {
+  /** @param {Sequelize.QueryInterface} queryInterface * @param {Sequelize.DataTypes} Sequelize */
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.createTable("products", {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+      },
 
-    /** @param {Sequelize.QueryInterface} queryInterface * @param {Sequelize.DataTypes} Sequelize */
-    up: (queryInterface, Sequelize) => {
+      category_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: "categories", key: "id" },
+      },
 
-        return queryInterface.createTable('products', {
-            id: {
-                type: Sequelize.INTEGER,
-                primaryKey: true,
-                autoIncrement: true,
-                allowNull: false
-            },
+      title: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
 
-            category_id: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-                references: { model: 'categories', key: 'id' }
-            },  
+      description: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
 
-            title: {
-                type: Sequelize.STRING,
-                allowNull: false
-            },
+      html_body: {
+        type: Sequelize.TEXT,
+        defaultValue: "<p>Em breve</p>",
+      },
 
-            description: {
-                type: Sequelize.STRING,
-                allowNull: false
-            },
+      price: {
+        type: Sequelize.DECIMAL,
+        allowNull: false,
+      },
 
-            html_body: {
-                type: Sequelize.TEXT,
-                defaultValue: '<p>Em breve</p>'
-            },
+      quantity_stock: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        allowNull: false,
+      },
 
-            price: {
-                type: Sequelize.DECIMAL,
-                allowNull: false
-            },
+      quantity_sold: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        allowNull: false,
+      },
 
-            quantity_stock: {
-                type: Sequelize.INTEGER,
-                defaultValue: 0,
-                allowNull: false
-            },  
+      discount_percent: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        allowNull: true,
+      },
 
-            quantity_sold: {
-                type: Sequelize.INTEGER,
-                defaultValue: 0,
-                allowNull: false
-            }, 
+      discount_datetime_start: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
 
-            discount_percent: {
-                type: Sequelize.INTEGER,
-                defaultValue: 0
-            },
+      discount_datetime_end: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
 
-            discount_datetime_start: {
-                type: Sequelize.DATE,
-                allowNull: true
-            },
+      tangible: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true,
+      },
 
-            discount_datetime_end: {
-                type: Sequelize.DATE,
-                allowNull: true
-            },
+      weight: {
+        type: Sequelize.DECIMAL,
+        allowNull: true,
+      },
 
-            tangible: {
-                type: Sequelize.BOOLEAN,
-                allowNull: false,
-            },
+      length: {
+        type: Sequelize.DECIMAL,
+        allowNull: true,
+      },
 
-            weight: {
-                type: Sequelize.DECIMAL,
-                allowNull: false,
-            },
+      height: {
+        type: Sequelize.DECIMAL,
+        allowNull: true,
+      },
 
-            length: {
-                type: Sequelize.DECIMAL,
-                allowNull: false,
-            },
+      width: {
+        type: Sequelize.DECIMAL,
+        allowNull: true,
+      },
 
-            height: {
-                type: Sequelize.DECIMAL,
-                allowNull: false,
-            },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+      },
 
-            width: {
-                type: Sequelize.DECIMAL,
-                allowNull: false,
-            },
-            
-            created_at: {
-                type: Sequelize.DATE,
-                allowNull: false,
-                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-            },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+      },
 
-            updated_at: {
-                type: Sequelize.DATE,
-                allowNull: false,
-                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-            },
+      deleted_at: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+    });
+  },
 
-            deleted_at: {
-                type: Sequelize.DATE,
-                allowNull: true,
-            }
-        });
-    },
-
-    /** @param {Sequelize.QueryInterface} queryInterface * @param {Sequelize.DataTypes} Sequelize */
-    down: (queryInterface, Sequelize) => {
-
-        return queryInterface.dropTable('products');
-    }
+  /** @param {Sequelize.QueryInterface} queryInterface * @param {Sequelize.DataTypes} Sequelize */
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.dropTable("products");
+  },
 };
