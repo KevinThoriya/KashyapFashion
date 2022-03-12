@@ -27,6 +27,7 @@ import {
   AutocompleteInput,
   ReferenceManyField,
   Button,
+  SelectArrayInput,
 } from "react-admin";
 
 import { Link } from "react-router-dom";
@@ -68,11 +69,14 @@ const ProductFilters = [
     source="html_body"
     alwaysOn
   />,
+  <ReferenceInput source="category_id" key="categories" reference="categories">
+    <AutocompleteInput optionText="name" />
+  </ReferenceInput>,
 ];
 
 export const ProductList = (props) => {
   return (
-    <List {...props} actions={<ListActions />} filters={ProductFilters}>
+    <List {...props} filters={ProductFilters}>
       <Datagrid>
         <TextField source="title" />
         <TextField source="description" />
@@ -99,76 +103,17 @@ export const ProductCreate = (props) => {
 
   return (
     <Create {...props}>
-      <SimpleForm>
+      <SimpleForm variant="standard">
         <div className="min-w-full min-h-full grid grid-cols-2 gap-y-2 gap-x-5">
           <TextInput source="title" fullWidth validate={required()} />
-          <TextInput source="description" fullWidth validate={required()} />
-          <TextInput
-            source="price"
-            type="number"
-            fullWidth
-            validate={required()}
-          />
-          <TextInput
-            source="quantity_stock"
-            type="number"
-            fullWidth
-            validate={required()}
-          />
-          <BooleanInput source="tangible" fullWidth />
           <ReferenceInput
             label="Category"
             source="category_id"
             reference="categories"
             fullWidth
           >
-            <SelectInput optionText="name" />
+            <AutocompleteInput optionText="name" />
           </ReferenceInput>
-          <TextInput
-            source="weight"
-            type="number"
-            fullWidth
-            validate={required()}
-          />
-          <TextInput
-            source="length"
-            type="number"
-            fullWidth
-            validate={required()}
-          />
-          <TextInput
-            source="height"
-            type="number"
-            fullWidth
-            validate={required()}
-          />
-          <TextInput
-            source="width"
-            type="number"
-            fullWidth
-            validate={required()}
-          />
-        </div>
-
-        <Tab label="Info about product" className="border bg-slate-400">
-          <RichTextInput source="html_body" label="product info" />
-        </Tab>
-
-        <ImageInput multiple source="images" accept="image/*">
-          <ImageField source="url" title="title" />
-        </ImageInput>
-      </SimpleForm>
-    </Create>
-  );
-};
-
-export const ProductEdit = (props) => {
-  return (
-    <Edit {...props}>
-      <SimpleForm variant="standard">
-        <div className="min-w-full min-h-full grid grid-cols-2 gap-y-2 gap-x-5">
-          <TextInput source="title" fullWidth validate={required()} />
-          <TextInput source="description" fullWidth validate={required()} />
           <TextInput
             source="price"
             type="number"
@@ -182,40 +127,18 @@ export const ProductEdit = (props) => {
             fullWidth
             validate={required()}
           />
-          <BooleanInput source="tangible" fullWidth />
-          <ReferenceInput
-            label="Category"
-            source="category_id"
-            reference="categories"
-            fullWidth
-          >
-            <AutocompleteInput optionText="name" />
-          </ReferenceInput>
-          <TextInput
-            source="weight"
-            type="number"
-            fullWidth
-            validate={required()}
-          />
-          <TextInput
-            source="length"
-            type="number"
-            fullWidth
-            validate={required()}
-          />
-          <TextInput
-            source="height"
-            type="number"
-            fullWidth
-            validate={required()}
-          />
-          <TextInput
-            source="width"
-            type="number"
-            fullWidth
-            validate={required()}
-          />
         </div>
+
+        <ReferenceArrayInput source="size_ids" reference="sizes">
+          <SelectArrayInput optionText="name" />
+        </ReferenceArrayInput>
+
+        <TextInput
+          multiline
+          source="description"
+          fullWidth
+          validate={required()}
+        />
 
         <Tab label="Info about product" className="border bg-slate-400">
           <RichTextInput source="html_body" label="product info" />
@@ -246,14 +169,91 @@ export const ProductEdit = (props) => {
         >
           <CameraAltOutlined />
         </Button>
-        {/* <ReferenceArrayInput source="images" resource="photos">
-          <SimpleFormIterator>
-              <TextField source="filename" /> */}
-        {/* <ImageInput  source="url" accept="image/*"> */}
-        {/* <ImageField source="url" title="title" /> */}
-        {/* </ImageInput> */}
-        {/* </SimpleFormIterator>
-        </ReferenceArrayInput> */}
+      </SimpleForm>
+    </Create>
+  );
+};
+
+export const ProductEdit = (props) => {
+  return (
+    <Edit {...props}>
+      <SimpleForm variant="standard">
+        <div className="min-w-full min-h-full grid grid-cols-2 gap-y-2 gap-x-5">
+          <TextInput source="title" fullWidth validate={required()} />
+          <ReferenceInput
+            label="Category"
+            source="category_id"
+            reference="categories"
+            fullWidth
+          >
+            <AutocompleteInput optionText="name" />
+          </ReferenceInput>
+          <TextInput
+            source="price"
+            type="number"
+            fullWidth
+            validate={required()}
+            variant="outlined"
+          />
+          <TextInput
+            source="quantity_stock"
+            type="number"
+            fullWidth
+            validate={required()}
+          />
+        </div>
+
+        <ReferenceManyField
+          source="size_ids"
+          basePath="sizes"
+          label="Product Images"
+          resource="sizes"
+          reference="sizes"
+          target="product_ids"
+        >
+          <Datagrid>
+            <TextField source="name" />
+          </Datagrid>
+
+          {/* <SelectArrayInput label="as" optionText="name" /> */}
+        </ReferenceManyField>
+
+        <TextInput
+          multiline
+          source="description"
+          fullWidth
+          validate={required()}
+        />
+
+        <Tab label="Info about product" className="border bg-slate-400">
+          <RichTextInput source="html_body" label="product info" />
+        </Tab>
+
+        <ReferenceManyField
+          reference="photos"
+          target="product_id"
+          label="Product Images"
+          basePath="photos"
+        >
+          <Datagrid>
+            <ImageField source="url" label="image" />
+            <TextField source="filename" />
+            <EditButton />
+            <DeleteButton />
+          </Datagrid>
+        </ReferenceManyField>
+
+        <Button
+          variant="text"
+          component={Link}
+          to={{
+            pathname: "/photos/create",
+            search: props.id,
+          }}
+          label="Add Image"
+        >
+          <CameraAltOutlined />
+        </Button>
       </SimpleForm>
     </Edit>
   );

@@ -32,6 +32,7 @@ const AddressModel = require("./models/AddressModel");
 const ProductModel = require("./models/ProductModel");
 const ImageModel = require("./models/ImageModel");
 const { Op } = require("sequelize");
+const productsizemodel = require("./models/productsizemodel");
 
 const app = express();
 const server = http.createServer(app);
@@ -41,7 +42,6 @@ app.use(express.json());
 //app.use(express.urlencoded({ extended: true }));
 
 app.use("/uploads", express.static(path.resolve(__dirname, "..", "uploads")));
-
 socketConnection(server);
 app.use(routes);
 
@@ -76,6 +76,7 @@ app.use(crud("/kashyap/categories", sequelizeCrud(CategoryModel), { filters }));
 app.use(crud("/kashyap/address", sequelizeCrud(AddressModel), { filters }));
 app.use(crud("/kashyap/products", sequelizeCrud(ProductModel), { filters }));
 app.use(crud("/kashyap/photos", sequelizeCrud(ImageModel), { filters }));
+app.use(crud("/kashyap/sizes", sequelizeCrud(productsizemodel), { filters }));
 
 pagarMeperiodicCheck();
 

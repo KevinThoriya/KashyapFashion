@@ -47,7 +47,7 @@ module.exports = {
       quantity_sold: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
-        allowNull: false,
+        allowNull: true,
       },
 
       discount_percent: {

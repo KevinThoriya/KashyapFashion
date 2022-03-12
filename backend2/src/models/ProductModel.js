@@ -4,6 +4,7 @@ const calcFinalPrice = require("../util/calcFinalPrice");
 const isOnSale = require("../util/isOnSale");
 
 const OrdersProducts = require("./OrdersProductsModel");
+const productsizemodel = require("./productsizemodel");
 
 class ProductModel extends Model {
   static init(connection) {
@@ -64,6 +65,7 @@ class ProductModel extends Model {
   }
 
   static associate(models) {
+    console.log("models ===== ==== = == ===", models);
     this.belongsToMany(models.OrderModel, {
       through: OrdersProducts,
       foreignKey: "product_id",
@@ -71,13 +73,17 @@ class ProductModel extends Model {
     });
 
     this.belongsTo(models.CategoryModel, {
-      foreignKey: "category_id",
+      foreignKey: "",
       as: "category",
     });
 
     this.hasMany(models.ImageModel, {
       foreignKey: "product_id",
       as: "images",
+    });
+    this.belongsToMany(models.productSizeModel, {
+      through: "ProductSizeProduct",
+      as: "size_ids",
     });
   }
 }

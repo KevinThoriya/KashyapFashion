@@ -1,76 +1,101 @@
-'use strict';
+"use strict";
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkInsert("categories", [
+      {
+        name: "Ready-to-Ship Styles",
+        parent_id: 0,
+      },
+    ]);
+    await queryInterface.bulkInsert("categories", [
+      {
+        name: "Wedding Collection",
+        parent_id: 0,
+      },
+    ]);
 
-    // 1
-    await queryInterface.bulkInsert('categories', [{
-      name: 'Hardware',
-      parent_id: 0,
-    }]);
+    await queryInterface.bulkInsert("categories", [
+      {
+        name: "Indowestern Gowns",
+        parent_id: 1,
+      },
+    ]);
 
     // 2
-    await queryInterface.bulkInsert('categories', [{
-      name: 'Periféricos',
-      parent_id: 0,
-    }]);
+    await queryInterface.bulkInsert("categories", [
+      {
+        name: "Kanchipuram Saree",
+        parent_id: 1,
+      },
+    ]);
 
     // 3
-    await queryInterface.bulkInsert('categories', [{
-      name: 'Monitores',
-      parent_id: 0,
-    }]);
+    await queryInterface.bulkInsert("categories", [
+      {
+        name: "Banarasi Sarees",
+        parent_id: 1,
+      },
+    ]);
 
     // 4
-    await queryInterface.bulkInsert('categories', [{
-      name: 'Processadores',
-      parent_id: 1,
-    }]);
+    await queryInterface.bulkInsert("categories", [
+      {
+        name: "Sharara Suit",
+        parent_id: 1,
+      },
+    ]);
 
     // 5
-    await queryInterface.bulkInsert('categories', [{
-      name: 'AMD',
-      parent_id: 4,
-    }]);
+    await queryInterface.bulkInsert("categories", [
+      {
+        name: "Party Wear Lehenga",
+        parent_id: 1,
+      },
+    ]);
 
     // 6
-    await queryInterface.bulkInsert('categories', [{
-      name: 'Intel',
-      parent_id: 4,
-    }]);
+    await queryInterface.bulkInsert("categories", [
+      {
+        name: "Bridal Lehenga",
+        parent_id: 2,
+      },
+    ]);
 
     // 7
-    await queryInterface.bulkInsert('categories', [{
-      name: 'Placas de Vídeo',
-      parent_id: 1,
-    }]);
+    await queryInterface.bulkInsert("categories", [
+      {
+        name: "Wedding Sarees",
+        parent_id: 2,
+      },
+    ]);
 
     // 8
-    await queryInterface.bulkInsert('categories', [{
-      name: 'AMD',
-      parent_id: 7,
-    }]);
+    await queryInterface.bulkInsert("categories", [
+      {
+        name: "Bridesmaid Lehenga",
+        parent_id: 2,
+      },
+    ]);
 
     // 9
-    await queryInterface.bulkInsert('categories', [{
-      name: 'Nvidia',
-      parent_id: 7,
-    }]);
+    await queryInterface.bulkInsert("categories", [
+      {
+        name: "Bridal Gowns",
+        parent_id: 2,
+      },
+    ]);
 
     // 10
-    await queryInterface.bulkInsert('categories', [{
-      name: 'Mouses',
-      parent_id: 2,
-    }]);
-
-    // 11
-    await queryInterface.bulkInsert('categories', [{
-      name: 'Teclados',
-      parent_id: 2,
-    }]);
+    await queryInterface.bulkInsert("categories", [
+      {
+        name: "Men's Sherwani",
+        parent_id: 2,
+      },
+    ]);
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('categories', null, {});
-  }
+    return queryInterface.bulkDelete("categories", null, {});
+  },
 };

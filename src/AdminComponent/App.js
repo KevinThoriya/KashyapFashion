@@ -23,9 +23,11 @@ import {
   Face,
   HandymanOutlined,
   Home,
+  PhotoSizeSelectActualRounded,
   Storefront,
   TocRounded,
 } from "@mui/icons-material";
+import { SizeCreate, SizeEdit, SizeList } from "./Sizes";
 
 const Login = (props) => {
   const login = useLogin();
@@ -85,6 +87,13 @@ const App = () => {
             create={UploadImageCreate}
             edit={UploadImageEdit}
             icon={Camera}
+          />
+          <Resource
+            name="sizes"
+            list={SizeList}
+            create={SizeCreate}
+            edit={SizeEdit}
+            icon={PhotoSizeSelectActualRounded}
           />
         </Admin>
       </div>
