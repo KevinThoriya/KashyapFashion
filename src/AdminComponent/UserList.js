@@ -1,4 +1,5 @@
 import React from "react";
+import { TextInput, SearchInput } from "./Fields";
 import {
   useListContext,
   TopToolbar,
@@ -9,7 +10,6 @@ import {
   sanitizeListRestProps,
   Datagrid,
   Create,
-  TextInput,
   SimpleForm,
   Edit,
   List,
@@ -18,7 +18,6 @@ import {
   EditButton,
   DeleteButton,
   EmailField,
-  SearchInput,
   email,
 } from "react-admin";
 import IconEvent from "@material-ui/icons/Event";

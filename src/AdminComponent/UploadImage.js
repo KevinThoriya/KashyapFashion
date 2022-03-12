@@ -1,31 +1,24 @@
-import React from "react";
+import { TextInput } from "./Fields";
 import {
   useListContext,
   TopToolbar,
   CreateButton,
   ExportButton,
-  FilterButton,
-  Button,
   sanitizeListRestProps,
   Datagrid,
   Create,
-  TextInput,
   SimpleForm,
   Edit,
   List,
-  TextField,
   required,
   EditButton,
+  TextField,
   DeleteButton,
-  EmailField,
   ReferenceField,
-  SearchInput,
   ReferenceInput,
   SelectInput,
 } from "react-admin";
-import IconEvent from "@material-ui/icons/Event";
-import { makeStyles, Theme } from "@material-ui/core/styles";
-import { Styles } from "@material-ui/styles/withStyles";
+import { makeStyles } from "@material-ui/core/styles";
 import { useLocation } from "react-router";
 
 export const styles = {

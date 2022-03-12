@@ -1,3 +1,4 @@
+import { TextInput, SearchInput } from "./Fields";
 import {
   useListContext,
   TopToolbar,
@@ -14,7 +15,6 @@ import {
   EditButton,
   DeleteButton,
   ReferenceField,
-  SearchInput,
   ReferenceInput,
   SelectInput,
   BooleanInput,
@@ -28,7 +28,7 @@ import {
   ReferenceManyField,
   Button,
 } from "react-admin";
-import { TextInput } from "./Fields";
+
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import RichTextInput from "ra-input-rich-text";

@@ -1,5 +1,5 @@
 import React from "react";
-import { TextInput } from "./Fields";
+import { TextInput, SearchInput } from "./Fields";
 import {
   useListContext,
   TopToolbar,
@@ -19,7 +19,6 @@ import {
   DeleteButton,
   EmailField,
   ReferenceField,
-  SearchInput,
   ReferenceInput,
   SelectInput,
 } from "react-admin";
