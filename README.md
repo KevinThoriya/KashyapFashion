@@ -1,4 +1,10 @@
-## Getting Started
+### Kashyap Fashion 
+
+  explored ReactAdmin with nodeJs as backend with sequelize, Kasjyap fasion is all about clothing ecormance.  
+
+##backend: NodeJs
+##fontend: reactAdmin, reactJS
+
 
 forntend
 
